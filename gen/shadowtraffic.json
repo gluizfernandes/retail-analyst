@@ -1,0 +1,292 @@
+{
+  "generators": [
+    {
+      "name": "lojas",
+      "connection": "pg",
+      "table": "lojas",
+      "row": {
+        "loja_id": { "_gen": "uuid" },
+        "rede": {
+          "_gen": "weightedOneOf",
+          "choices": [
+            {"weight": 0.14, "value": "Carrefour"},
+            {"weight": 0.12, "value": "Pão de Açúcar"},
+            {"weight": 0.10, "value": "Atacadão"},
+            {"weight": 0.08, "value": "Assaí"},
+            {"weight": 0.07, "value": "Extra"},
+            {"weight": 0.06, "value": "BIG"},
+            {"weight": 0.06, "value": "Coop"},
+            {"weight": 0.07, "value": "Raia Drogasil"},
+            {"weight": 0.05, "value": "Pacheco"},
+            {"weight": 0.05, "value": "Ultrafarma"},
+            {"weight": 0.05, "value": "Oxxo"},
+            {"weight": 0.04, "value": "AM/PM"},
+            {"weight": 0.05, "value": "Makro"},
+            {"weight": 0.03, "value": "Metro"},
+            {"weight": 0.03, "value": "Líder"}
+          ]
+        },
+        "canal": {
+          "_gen": "weightedOneOf",
+          "choices": [
+            {"weight": 0.60, "value": "supermercado"},
+            {"weight": 0.15, "value": "farmacia"},
+            {"weight": 0.10, "value": "conveniencia"},
+            {"weight": 0.15, "value": "atacado"}
+          ]
+        },
+        "cidade": { "_gen": "string", "expr": "#{Address.city}" },
+        "estado": {
+          "_gen": "weightedOneOf",
+          "choices": [
+            {"weight": 0.30, "value": "SP"},
+            {"weight": 0.14, "value": "RJ"},
+            {"weight": 0.12, "value": "MG"},
+            {"weight": 0.08, "value": "RS"},
+            {"weight": 0.08, "value": "PR"},
+            {"weight": 0.06, "value": "SC"},
+            {"weight": 0.06, "value": "BA"},
+            {"weight": 0.05, "value": "PE"},
+            {"weight": 0.04, "value": "DF"},
+            {"weight": 0.04, "value": "CE"},
+            {"weight": 0.03, "value": "PA"}
+          ]
+        },
+        "regiao": {
+          "_gen": "weightedOneOf",
+          "choices": [
+            {"weight": 0.44, "value": "Sudeste"},
+            {"weight": 0.18, "value": "Sul"},
+            {"weight": 0.14, "value": "Nordeste"},
+            {"weight": 0.12, "value": "Centro-Oeste"},
+            {"weight": 0.12, "value": "Norte"}
+          ]
+        }
+      },
+      "localConfigs": {
+        "maxEvents": 500
+      }
+    },
+    {
+      "name": "vendas",
+      "connection": "pg",
+      "table": "vendas",
+      "row": {
+        "venda_id": { "_gen": "uuid" },
+        "sku_id": {
+          "_gen": "weightedOneOf",
+          "choices": [
+            {"weight": 0.08, "value": "sku-001"},
+            {"weight": 0.05, "value": "sku-002"},
+            {"weight": 0.04, "value": "sku-003"},
+            {"weight": 0.06, "value": "sku-004"},
+            {"weight": 0.04, "value": "sku-005"},
+            {"weight": 0.03, "value": "sku-006"},
+            {"weight": 0.02, "value": "sku-007"},
+            {"weight": 0.04, "value": "sku-008"},
+            {"weight": 0.02, "value": "sku-009"},
+            {"weight": 0.03, "value": "sku-010"},
+            {"weight": 0.02, "value": "sku-011"},
+            {"weight": 0.03, "value": "sku-012"},
+            {"weight": 0.06, "value": "sku-013"},
+            {"weight": 0.03, "value": "sku-014"},
+            {"weight": 0.02, "value": "sku-015"},
+            {"weight": 0.01, "value": "sku-016"},
+            {"weight": 0.04, "value": "sku-017"},
+            {"weight": 0.02, "value": "sku-018"},
+            {"weight": 0.02, "value": "sku-019"},
+            {"weight": 0.01, "value": "sku-020"},
+            {"weight": 0.02, "value": "sku-021"},
+            {"weight": 0.01, "value": "sku-022"},
+            {"weight": 0.02, "value": "sku-023"},
+            {"weight": 0.01, "value": "sku-024"},
+            {"weight": 0.02, "value": "sku-025"},
+            {"weight": 0.01, "value": "sku-026"},
+            {"weight": 0.01, "value": "sku-027"},
+            {"weight": 0.01, "value": "sku-028"},
+            {"weight": 0.02, "value": "sku-029"},
+            {"weight": 0.01, "value": "sku-030"},
+            {"weight": 0.01, "value": "sku-031"},
+            {"weight": 0.01, "value": "sku-032"},
+            {"weight": 0.01, "value": "sku-033"},
+            {"weight": 0.02, "value": "sku-034"},
+            {"weight": 0.01, "value": "sku-035"},
+            {"weight": 0.01, "value": "sku-036"},
+            {"weight": 0.01, "value": "sku-037"},
+            {"weight": 0.01, "value": "sku-038"},
+            {"weight": 0.01, "value": "sku-039"},
+            {"weight": 0.01, "value": "sku-040"},
+            {"weight": 0.01, "value": "sku-041"},
+            {"weight": 0.02, "value": "sku-042"},
+            {"weight": 0.01, "value": "sku-043"},
+            {"weight": 0.01, "value": "sku-044"}
+          ]
+        },
+        "loja_id": {
+          "_gen": "lookup",
+          "table": "lojas",
+          "path": ["row", "loja_id"]
+        },
+        "periodo": {
+          "_gen": "weightedOneOf",
+          "choices": [
+            {"weight": 0.05, "value": "2024-01-01"},
+            {"weight": 0.05, "value": "2024-02-01"},
+            {"weight": 0.08, "value": "2024-03-01"},
+            {"weight": 0.12, "value": "2024-04-01"},
+            {"weight": 0.06, "value": "2024-05-01"},
+            {"weight": 0.09, "value": "2024-06-01"},
+            {"weight": 0.06, "value": "2024-07-01"},
+            {"weight": 0.06, "value": "2024-08-01"},
+            {"weight": 0.06, "value": "2024-09-01"},
+            {"weight": 0.09, "value": "2024-10-01"},
+            {"weight": 0.07, "value": "2024-11-01"},
+            {"weight": 0.11, "value": "2024-12-01"}
+          ]
+        },
+        "unidades_vendidas": {
+          "_gen": "uniformDistribution",
+          "bounds": [24, 1800],
+          "decimals": 0
+        },
+        "faturamento_bruto": {
+          "_gen": "uniformDistribution",
+          "bounds": [120.00, 12000.00],
+          "decimals": 2
+        },
+        "preco_medio": {
+          "_gen": "uniformDistribution",
+          "bounds": [2.29, 49.90],
+          "decimals": 2
+        }
+      },
+      "localConfigs": {
+        "maxEvents": 50000,
+        "throttleMs": { "_gen": "constant", "x": 10 }
+      }
+    },
+    {
+      "name": "reviews",
+      "connection": "fs",
+      "directory": "/data/reviews",
+      "data": {
+        "review_id": { "_gen": "uuid" },
+        "sku_id": {
+          "_gen": "weightedOneOf",
+          "choices": [
+            {"weight": 0.12, "value": "sku-001"},
+            {"weight": 0.08, "value": "sku-004"},
+            {"weight": 0.07, "value": "sku-013"},
+            {"weight": 0.06, "value": "sku-008"},
+            {"weight": 0.05, "value": "sku-017"},
+            {"weight": 0.05, "value": "sku-025"},
+            {"weight": 0.04, "value": "sku-034"},
+            {"weight": 0.04, "value": "sku-029"},
+            {"weight": 0.03, "value": "sku-032"},
+            {"weight": 0.03, "value": "sku-040"},
+            {"weight": 0.43, "value": "sku-007"}
+          ]
+        },
+        "marca_nome": {
+          "_gen": "weightedOneOf",
+          "choices": [
+            {"weight": 0.25, "value": "Lacta"},
+            {"weight": 0.14, "value": "Bis"},
+            {"weight": 0.13, "value": "Kit Kat"},
+            {"weight": 0.10, "value": "Serenata de Amor"},
+            {"weight": 0.08, "value": "Prestígio"},
+            {"weight": 0.07, "value": "Sonho de Valsa"},
+            {"weight": 0.07, "value": "Hershey's"},
+            {"weight": 0.06, "value": "Ferrero Rocher"},
+            {"weight": 0.05, "value": "Special Dark"},
+            {"weight": 0.05, "value": "Unique"}
+          ]
+        },
+        "rating": {
+          "_gen": "weightedOneOf",
+          "choices": [
+            {"weight": 0.04, "value": 1},
+            {"weight": 0.07, "value": 2},
+            {"weight": 0.17, "value": 3},
+            {"weight": 0.32, "value": 4},
+            {"weight": 0.40, "value": 5}
+          ]
+        },
+        "comentario": {
+          "_gen": "weightedOneOf",
+          "choices": [
+            {"weight": 0.06, "value": "Chocolate com sabor artificial, longe do que esperava pela marca."},
+            {"weight": 0.07, "value": "Embalagem bonita mas o chocolate estava derretido na entrega."},
+            {"weight": 0.04, "value": "Muito doce, enjoativo. Prefiro os importados."},
+            {"weight": 0.04, "value": "Preco abusivo para um chocolate tao comum."},
+            {"weight": 0.03, "value": "Comprei para presente e vieram amassados. Decepcionante."},
+            {"weight": 0.08, "value": "Clássico de sempre, consistente e saboroso. Nao decepciona."},
+            {"weight": 0.07, "value": "Meu chocolate favorito desde criança. Textura perfeita."},
+            {"weight": 0.08, "value": "Boa relação custo-benefício. Compro sempre no supermercado."},
+            {"weight": 0.06, "value": "Excelente para presente. Embalagem elegante e chocolate de qualidade."},
+            {"weight": 0.05, "value": "O recheio é o destaque. Combina muito bem com o chocolate ao leite."},
+            {"weight": 0.06, "value": "Produto bom mas achei o tamanho menor do que antes. Reduziram?"},
+            {"weight": 0.05, "value": "Comprei na promoção de Páscoa e valeu muito a pena."},
+            {"weight": 0.07, "value": "Derrete na boca, qualidade premium por um preco acessível."},
+            {"weight": 0.05, "value": "Perfeito para dividir com a família. Todo mundo adorou."},
+            {"weight": 0.06, "value": "O amargor é na medida certa. Para quem gosta de 70% cacau, recomendo."},
+            {"weight": 0.04, "value": "Esperava mais da marca. Sabor não impressiona tanto."},
+            {"weight": 0.05, "value": "Chegou no prazo e bem embalado. Chocolate saboroso e fresquinho."},
+            {"weight": 0.04, "value": "Ótimo para receitas também. Derrete muito bem no micro-ondas."}
+          ]
+        },
+        "sentimento": {
+          "_gen": "weightedOneOf",
+          "choices": [
+            {"weight": 0.58, "value": "positivo"},
+            {"weight": 0.22, "value": "neutro"},
+            {"weight": 0.20, "value": "negativo"}
+          ]
+        },
+        "canal_compra": {
+          "_gen": "weightedOneOf",
+          "choices": [
+            {"weight": 0.55, "value": "supermercado"},
+            {"weight": 0.20, "value": "e-commerce"},
+            {"weight": 0.15, "value": "farmacia"},
+            {"weight": 0.10, "value": "conveniencia"}
+          ]
+        }
+      },
+      "localConfigs": {
+        "maxEvents": 800,
+        "throttleMs": { "_gen": "constant", "x": 200 }
+      },
+      "fileConfigs": {
+        "format": "jsonl",
+        "filePrefix": "reviews-chocolate"
+      }
+    }
+  ],
+  "connections": {
+    "pg": {
+      "kind": "postgres",
+      "connectionConfigs": {
+        "host": "postgres",
+        "port": 5432,
+        "db": "malu_doces",
+        "username": "malu_doces",
+        "password": "malu_doces"
+      },
+      "tablePolicy": "manual"
+    },
+    "fs": {
+      "kind": "fileSystem"
+    }
+  },
+  "schedule": {
+    "stages": [
+      {
+        "generators": ["lojas"]
+      },
+      {
+        "generators": ["vendas", "reviews"]
+      }
+    ]
+  }
+}

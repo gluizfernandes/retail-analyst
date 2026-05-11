@@ -1,0 +1,40 @@
+services:
+  postgres:
+    image: docker.io/library/postgres:16-alpine
+    environment:
+      POSTGRES_DB: malu_doces
+      POSTGRES_USER: malu_doces
+      POSTGRES_PASSWORD: malu_doces
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U malu_doces -d malu_doces"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  qdrant:
+    image: docker.io/qdrant/qdrant:v1.8.4
+    ports:
+      - "6334:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+  shadowtraffic:
+    image: docker.io/shadowtraffic/shadowtraffic:latest
+    env_file:
+      - ../license.env
+    volumes:
+      - ./shadowtraffic.json:/config.json
+      - ./data:/data/reviews
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: ["--config", "/config.json"]
+
+volumes:
+  postgres_data:
+  qdrant_data:

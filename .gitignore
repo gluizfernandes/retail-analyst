@@ -1,0 +1,26 @@
+# Ambiente Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Credenciais — NUNCA commitar
+.env
+license.env
+
+# Outputs gerados
+output/
+gen/data/
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+
+# macOS
+.DS_Store
+
+# Claude Code (contexto local, não relevante para outros)
+.claude/
+.files

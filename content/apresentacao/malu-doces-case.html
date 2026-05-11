@@ -1,0 +1,1834 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Malu Doces | Retail Analyst — Mercado de Chocolates 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap');
+
+  :root {
+    --rosa:    #F2A7BB;
+    --lilas:   #C8A8E9;
+    --creme:   #FFF5E6;
+    --menta:   #A8D8C8;
+    --choco:   #3D1C02;
+    --choco2:  #7B4F2E;
+    --choco3:  #B07850;
+    --off:     #FAF0E0;
+    --gray:    #9E8070;
+    --gray2:   #C4A882;
+    --font-title: 'Dancing Script', cursive;
+    --font:       'Lato', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%; height: 100%;
+    font-family: var(--font);
+    background: var(--creme);
+    overflow: hidden;
+  }
+
+  .presentation { width: 100vw; height: 100vh; position: relative; }
+
+  .slide {
+    width: 100%; height: 100%;
+    display: none; position: absolute;
+    top: 0; left: 0; overflow: hidden;
+  }
+  .slide.active { display: flex; }
+
+  /* ── NAV ── */
+  .nav {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; gap: 16px; z-index: 1000;
+    background: rgba(255,245,230,0.92);
+    border: 1px solid rgba(242,167,187,0.4);
+    border-radius: 40px; padding: 10px 20px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 24px rgba(242,167,187,0.2);
+  }
+  .nav button {
+    background: none; border: 1px solid rgba(242,167,187,0.5);
+    color: var(--choco2); width: 36px; height: 36px; border-radius: 50%;
+    cursor: pointer; font-size: 16px; display: flex;
+    align-items: center; justify-content: center; transition: all 0.2s;
+  }
+  .nav button:hover { background: var(--rosa); color: #fff; border-color: var(--rosa); }
+  #counter {
+    color: var(--choco2); font-size: 13px; font-weight: 700;
+    min-width: 60px; text-align: center; letter-spacing: 0.05em;
+  }
+
+  /* ── SHARED ── */
+  .slide-header {
+    display: flex; align-items: center; gap: 16px; margin-bottom: 40px;
+  }
+  .slide-header .tag {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--choco2);
+    background: rgba(242,167,187,0.25);
+    border: 1px solid rgba(242,167,187,0.5);
+    padding: 4px 12px; border-radius: 20px;
+  }
+  .slide-header h2 {
+    font-family: var(--font-title);
+    font-size: 30px; font-weight: 700; color: var(--choco);
+  }
+  .slide-header .line { flex: 1; height: 1px; background: rgba(61,28,2,0.1); }
+
+  .brand-badge {
+    position: absolute; top: 32px; right: 48px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .brand-badge .bname {
+    font-family: var(--font-title);
+    font-size: 18px; font-weight: 700; color: var(--choco);
+  }
+  .brand-badge .bbar { width: 3px; height: 20px; background: var(--rosa); border-radius: 2px; }
+
+  /* ══════════════════════════════════════════
+     S1 — CAPA
+  ══════════════════════════════════════════ */
+  #s1 {
+    background: linear-gradient(135deg, #FFF0F5 0%, var(--creme) 50%, #F0EAF8 100%);
+    flex-direction: column; justify-content: center; align-items: flex-start;
+    padding: 0 10%;
+  }
+
+  #s1 .accent-bar {
+    width: 56px; height: 4px;
+    background: linear-gradient(90deg, var(--rosa), var(--lilas));
+    border-radius: 2px; margin-bottom: 36px;
+  }
+  #s1 .s1-tag {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--choco2); margin-bottom: 20px;
+    opacity: 0.8;
+  }
+  #s1 h1 {
+    font-family: var(--font-title);
+    font-size: clamp(52px, 7vw, 88px); font-weight: 700;
+    color: var(--choco); line-height: 1.05; max-width: 760px;
+    margin-bottom: 8px; letter-spacing: -0.01em;
+  }
+  #s1 h1 span { color: var(--rosa); }
+  #s1 .s1-sub {
+    font-size: 18px; font-weight: 300; color: var(--choco2);
+    max-width: 520px; line-height: 1.7; margin-bottom: 56px;
+  }
+  #s1 .meta-bar { display: flex; gap: 48px; }
+  #s1 .meta-item { display: flex; flex-direction: column; gap: 4px; }
+  #s1 .meta-item .mlabel {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.18em; color: var(--gray);
+  }
+  #s1 .meta-item .mvalue {
+    font-size: 14px; font-weight: 700; color: var(--choco);
+  }
+
+  #s1 .deco-circle {
+    position: absolute; right: 6%; top: 50%; transform: translateY(-50%);
+    width: 340px; height: 340px; border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, rgba(242,167,187,0.35), rgba(200,168,233,0.15) 60%, transparent 80%);
+    border: 1px solid rgba(242,167,187,0.3);
+  }
+  #s1 .deco-circle::after {
+    content: '';
+    position: absolute; top: 32px; left: 32px; right: -32px; bottom: -32px;
+    border: 1px solid rgba(200,168,233,0.2); border-radius: 50%;
+  }
+  #s1 .deco-dot {
+    position: absolute; right: 18%; top: 32%;
+    width: 12px; height: 12px;
+    background: var(--rosa); border-radius: 50%;
+    box-shadow: 0 0 20px rgba(242,167,187,0.7);
+  }
+
+  /* ══════════════════════════════════════════
+     S2 — AGENDA
+  ══════════════════════════════════════════ */
+  #s2 { background: var(--off); flex-direction: column; padding: 56px 10%; }
+
+  .agenda-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; flex: 1; }
+  .agenda-item {
+    display: flex; align-items: center; gap: 16px;
+    background: #fff; border: 1px solid rgba(61,28,2,0.08);
+    border-radius: 10px; padding: 18px 22px;
+    transition: border-color 0.2s;
+  }
+  .agenda-item:hover { border-color: rgba(242,167,187,0.6); }
+  .agenda-item .anum {
+    font-size: 11px; font-weight: 900; color: var(--choco2);
+    background: rgba(242,167,187,0.2);
+    width: 30px; height: 30px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .agenda-item .atext { font-size: 14px; font-weight: 700; color: var(--choco); }
+  .agenda-item .asub { font-size: 12px; color: var(--gray); margin-top: 2px; }
+
+  /* ══════════════════════════════════════════
+     S3 — VISÃO GERAL (KPIs)
+  ══════════════════════════════════════════ */
+  #s3 { background: var(--creme); flex-direction: column; padding: 56px 10%; }
+
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 32px; }
+  .kpi-card {
+    background: #fff; border: 1px solid rgba(61,28,2,0.08);
+    border-radius: 12px; padding: 28px 24px; position: relative; overflow: hidden;
+  }
+  .kpi-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: var(--rosa);
+  }
+  .kpi-card.lilas::before { background: var(--lilas); }
+  .kpi-card.menta::before { background: var(--menta); }
+  .kpi-card.choco::before { background: var(--choco3); }
+  .kpi-label {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.15em; color: var(--gray); margin-bottom: 10px;
+  }
+  .kpi-value {
+    font-size: clamp(28px, 3vw, 44px); font-weight: 900;
+    color: var(--choco); line-height: 1; letter-spacing: -0.02em;
+  }
+  .kpi-sub { font-size: 12px; color: var(--gray); margin-top: 8px; line-height: 1.4; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; flex: 1; }
+  .info-block {
+    background: #fff; border: 1px solid rgba(61,28,2,0.08);
+    border-radius: 10px; padding: 24px;
+  }
+  .info-block h4 {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.15em; color: var(--gray); margin-bottom: 16px;
+  }
+  .info-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 0; border-bottom: 1px solid rgba(61,28,2,0.06);
+  }
+  .info-row:last-child { border-bottom: none; }
+  .info-row .iname { font-size: 13px; color: var(--choco2); }
+  .info-row .ivalue { font-size: 13px; font-weight: 700; color: var(--choco); }
+  .info-row .ibadge {
+    font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px;
+    background: rgba(168,216,200,0.3); color: #2D8060;
+  }
+  .info-row .ibadge.alert { background: rgba(242,167,187,0.3); color: #A03050; }
+
+  /* ══════════════════════════════════════════
+     S4 — RANKING DE MARCAS
+  ══════════════════════════════════════════ */
+  #s4 { background: var(--off); flex-direction: column; padding: 56px 10%; }
+
+  .ranking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; flex: 1; }
+  .rank-list { display: flex; flex-direction: column; gap: 8px; }
+  .rank-item {
+    display: flex; align-items: center; gap: 12px;
+    background: #fff; border: 1px solid rgba(61,28,2,0.07);
+    border-radius: 8px; padding: 12px 16px;
+  }
+  .rank-item.top1 { border-color: rgba(242,167,187,0.5); background: rgba(242,167,187,0.06); }
+  .rank-item.top2 { border-color: rgba(200,168,233,0.4); }
+  .rank-item.top3 { border-color: rgba(168,216,200,0.4); }
+  .rank-pos {
+    font-size: 12px; font-weight: 900; color: var(--gray2);
+    width: 22px; text-align: right; flex-shrink: 0;
+  }
+  .rank-pos.gold { color: var(--rosa); }
+  .rank-pos.silver { color: var(--lilas); }
+  .rank-pos.bronze { color: var(--menta); }
+  .rank-name { flex: 1; font-size: 13px; font-weight: 700; color: var(--choco); }
+  .rank-fab { font-size: 10px; color: var(--gray); }
+  .rank-bar-wrap { width: 100px; height: 6px; background: rgba(61,28,2,0.08); border-radius: 3px; }
+  .rank-bar { height: 100%; border-radius: 3px; background: var(--rosa); }
+  .rank-share { font-size: 12px; font-weight: 700; color: var(--choco2); min-width: 42px; text-align: right; }
+  .rank-fat { font-size: 11px; color: var(--gray); min-width: 72px; text-align: right; }
+
+  .seg-panel {
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .seg-card {
+    background: #fff; border: 1px solid rgba(61,28,2,0.07);
+    border-radius: 10px; padding: 20px 22px; flex: 1;
+  }
+  .seg-card h4 { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gray); margin-bottom: 12px; }
+  .seg-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .seg-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .seg-label { font-size: 12px; color: var(--choco2); flex: 1; }
+  .seg-val { font-size: 12px; font-weight: 700; color: var(--choco); }
+  .seg-pbar { flex: 1; height: 5px; background: rgba(61,28,2,0.08); border-radius: 3px; overflow: hidden; }
+  .seg-pfill { height: 100%; border-radius: 3px; }
+
+  /* ══════════════════════════════════════════
+     S5 — CANAIS
+  ══════════════════════════════════════════ */
+  #s5 { background: var(--creme); flex-direction: column; padding: 56px 10%; }
+
+  .canal-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 28px; }
+  .canal-card {
+    background: #fff; border: 1px solid rgba(61,28,2,0.07);
+    border-radius: 12px; padding: 28px 22px; position: relative; overflow: hidden;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .canal-icon { font-size: 28px; }
+  .canal-name {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.15em; color: var(--gray);
+  }
+  .canal-fat {
+    font-size: clamp(20px, 2.5vw, 32px); font-weight: 900;
+    color: var(--choco); line-height: 1; letter-spacing: -0.02em;
+  }
+  .canal-share {
+    font-size: 13px; font-weight: 700; color: var(--choco2);
+  }
+  .canal-bar {
+    height: 4px; border-radius: 2px; margin-top: 4px;
+  }
+  .canal-card.c1 .canal-bar { background: var(--rosa); width: 59%; }
+  .canal-card.c2 .canal-bar { background: var(--lilas); width: 16%; }
+  .canal-card.c3 .canal-bar { background: var(--menta); width: 15%; }
+  .canal-card.c4 .canal-bar { background: var(--choco3); width: 9%; }
+
+  .canal-insight {
+    background: rgba(242,167,187,0.1); border: 1px solid rgba(242,167,187,0.3);
+    border-radius: 10px; padding: 20px 24px;
+    display: flex; gap: 24px; align-items: center;
+  }
+  .canal-insight .ci-icon { font-size: 32px; flex-shrink: 0; }
+  .canal-insight p { font-size: 14px; color: var(--choco2); line-height: 1.6; }
+  .canal-insight strong { color: var(--choco); }
+
+  /* ══════════════════════════════════════════
+     S6 — SAZONALIDADE
+  ══════════════════════════════════════════ */
+  #s6 { background: var(--off); flex-direction: column; padding: 56px 10%; }
+
+  .saz-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; flex: 1; }
+  .saz-chart { display: flex; flex-direction: column; justify-content: flex-end; gap: 0; }
+  .saz-bars { display: flex; align-items: flex-end; gap: 6px; height: 200px; }
+  .saz-bar-wrap { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; }
+  .saz-bar {
+    width: 100%; border-radius: 4px 4px 0 0;
+    background: rgba(242,167,187,0.3);
+    transition: background 0.2s;
+    display: flex; align-items: flex-start; justify-content: center;
+    padding-top: 4px;
+  }
+  .saz-bar.peak { background: var(--rosa); }
+  .saz-bar.high { background: rgba(242,167,187,0.6); }
+  .saz-bar .saz-v {
+    font-size: 9px; font-weight: 700; color: var(--choco);
+    writing-mode: horizontal-tb; transform: rotate(0deg);
+  }
+  .saz-month { font-size: 9px; color: var(--gray); font-weight: 700; text-transform: uppercase; }
+  .saz-axis { height: 1px; background: rgba(61,28,2,0.1); margin-top: 4px; }
+
+  .saz-insights { display: flex; flex-direction: column; gap: 14px; justify-content: center; }
+  .saz-insight-card {
+    background: #fff; border: 1px solid rgba(61,28,2,0.07);
+    border-radius: 10px; padding: 18px 20px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .saz-insight-card .sic-icon { font-size: 24px; flex-shrink: 0; }
+  .sac-title { font-size: 12px; font-weight: 700; color: var(--choco); margin-bottom: 4px; }
+  .sac-desc { font-size: 12px; color: var(--gray); line-height: 1.5; }
+  .sac-tag {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    background: rgba(242,167,187,0.2); color: var(--choco2);
+    padding: 2px 8px; border-radius: 20px; margin-top: 6px;
+  }
+
+  /* ══════════════════════════════════════════
+     S7 — VOZ DO CONSUMIDOR
+  ══════════════════════════════════════════ */
+  #s7 { background: var(--creme); flex-direction: column; padding: 56px 10%; }
+
+  .voz-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 28px; flex: 1; }
+  .sentiment-panel {
+    background: #fff; border: 1px solid rgba(61,28,2,0.07);
+    border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 20px;
+  }
+  .sentiment-panel h4 { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gray); }
+  .sent-item { display: flex; flex-direction: column; gap: 6px; }
+  .sent-label { display: flex; justify-content: space-between; }
+  .sent-name { font-size: 13px; font-weight: 700; color: var(--choco); }
+  .sent-pct { font-size: 13px; font-weight: 700; }
+  .sent-pct.pos { color: #2D8060; }
+  .sent-pct.neu { color: var(--choco3); }
+  .sent-pct.neg { color: #A03050; }
+  .sent-bar { height: 8px; border-radius: 4px; background: rgba(61,28,2,0.06); overflow: hidden; }
+  .sent-fill { height: 100%; border-radius: 4px; }
+  .fill-pos { background: var(--menta); }
+  .fill-neu { background: var(--choco3); }
+  .fill-neg { background: var(--rosa); }
+
+  .reviews-panel { display: flex; flex-direction: column; gap: 12px; }
+  .review-card {
+    background: #fff; border: 1px solid rgba(61,28,2,0.07);
+    border-radius: 10px; padding: 18px 20px;
+    display: flex; gap: 14px;
+  }
+  .review-card.neg { border-left: 3px solid var(--rosa); }
+  .review-card.pos { border-left: 3px solid var(--menta); }
+  .review-card .rv-meta { flex-shrink: 0; }
+  .rv-marca { font-size: 11px; font-weight: 700; color: var(--choco2); margin-bottom: 2px; }
+  .rv-stars { font-size: 13px; }
+  .rv-quote { font-size: 13px; color: var(--choco); line-height: 1.5; flex: 1; }
+  .rv-tag {
+    font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px;
+    margin-left: auto; flex-shrink: 0; align-self: center;
+  }
+  .rv-tag.elogio { background: rgba(168,216,200,0.3); color: #2D8060; }
+  .rv-tag.alerta { background: rgba(242,167,187,0.3); color: #A03050; }
+
+  /* ══════════════════════════════════════════
+     S8 — ARQUITETURA MULTI-AGENTE
+  ══════════════════════════════════════════ */
+  #s8 { background: linear-gradient(135deg, #FFF0F5 0%, #F5F0FF 100%); flex-direction: column; padding: 40px 8%; }
+
+  .arch-layout { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 0; align-items: stretch; }
+  .arch-agent {
+    background: #fff;
+    border: 1px solid rgba(61,28,2,0.08);
+    border-radius: 12px; padding: 18px 16px;
+    display: flex; flex-direction: column; gap: 8px;
+    box-shadow: 0 2px 12px rgba(242,167,187,0.1);
+  }
+  .arch-agent.highlight { border-color: rgba(242,167,187,0.5); background: rgba(255,248,252,1); }
+  .arch-agent-icon { font-size: 26px; }
+  .arch-agent-name {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.15em; color: var(--choco2);
+  }
+  .arch-agent-role { font-size: 13px; font-weight: 700; color: var(--choco); line-height: 1.4; }
+  .arch-agent-tool {
+    font-size: 11px; color: var(--gray); display: flex; flex-direction: column; gap: 4px;
+  }
+  .arch-tool-chip {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: rgba(242,167,187,0.12); border: 1px solid rgba(242,167,187,0.3);
+    border-radius: 20px; padding: 3px 10px; font-size: 10px; color: var(--choco2);
+    width: fit-content;
+  }
+  .arch-agent-desc {
+    font-size: 10px; color: var(--gray); line-height: 1.55;
+    border-top: 1px solid rgba(61,28,2,0.07); padding-top: 8px; margin-top: 2px;
+  }
+  .arch-arrow {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 4px; padding: 0 14px; justify-content: center;
+  }
+  .arch-arrow .arr { font-size: 20px; color: var(--rosa); }
+  .arch-arrow .arr-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray); text-align: center; }
+
+  .arch-stores { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 16px; }
+  .arch-store-card {
+    background: #fff; border: 1px solid rgba(61,28,2,0.08);
+    border-radius: 10px; padding: 12px 14px;
+  }
+  .arch-store-title {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.12em; color: var(--choco2); margin-bottom: 5px;
+  }
+  .arch-store-desc { font-size: 10px; color: var(--gray); line-height: 1.5; }
+  .arch-store-items { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+  .arch-store-tag {
+    font-size: 9px; background: rgba(61,28,2,0.04); border: 1px solid rgba(61,28,2,0.08);
+    border-radius: 4px; padding: 2px 7px; color: var(--choco2); font-weight: 700;
+  }
+
+  .arch-bottom { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  .arch-stack-chip {
+    display: flex; align-items: center; gap: 8px;
+    background: #fff; border: 1px solid rgba(61,28,2,0.1);
+    border-radius: 8px; padding: 7px 12px;
+    font-size: 10px; font-weight: 700; color: var(--choco2);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+
+  /* ══════════════════════════════════════════
+     S9 — OPORTUNIDADES
+  ══════════════════════════════════════════ */
+  #s9 { background: var(--off); flex-direction: column; padding: 56px 10%; }
+
+  .opp-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; flex: 1; }
+  .opp-card {
+    background: #fff; border: 1px solid rgba(61,28,2,0.07);
+    border-radius: 12px; padding: 28px 24px;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .opp-num {
+    font-size: 11px; font-weight: 900; color: var(--gray2);
+    background: rgba(242,167,187,0.15); border: 1px solid rgba(242,167,187,0.3);
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .opp-title { font-size: 16px; font-weight: 900; color: var(--choco); line-height: 1.3; }
+  .opp-desc { font-size: 13px; color: var(--choco2); line-height: 1.6; flex: 1; }
+  .opp-data {
+    font-size: 11px; font-weight: 700; color: var(--gray);
+    background: rgba(61,28,2,0.05); border-radius: 6px; padding: 8px 12px;
+  }
+  .opp-data span { color: var(--choco2); }
+
+  /* ══════════════════════════════════════════
+     S10 — PRÓXIMOS PASSOS
+  ══════════════════════════════════════════ */
+  #s10 {
+    background: linear-gradient(135deg, #FFF0F5 0%, var(--creme) 50%, #EEF8F4 100%);
+    flex-direction: column; justify-content: center; align-items: flex-start;
+    padding: 0 10%;
+  }
+  #s10 h2 {
+    font-family: var(--font-title);
+    font-size: clamp(42px, 6vw, 72px); font-weight: 700;
+    color: var(--choco); line-height: 1.1; max-width: 700px; margin-bottom: 48px;
+  }
+  #s10 h2 span { color: var(--rosa); }
+
+  .cta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 48px; max-width: 800px; }
+  .cta-card {
+    background: #fff; border: 1px solid rgba(61,28,2,0.08);
+    border-radius: 10px; padding: 20px 18px;
+    display: flex; flex-direction: column; gap: 8px;
+    box-shadow: 0 2px 8px rgba(242,167,187,0.1);
+  }
+  .cta-icon { font-size: 22px; }
+  .cta-title { font-size: 13px; font-weight: 700; color: var(--choco2); }
+  .cta-desc { font-size: 12px; color: var(--gray); line-height: 1.5; }
+
+  .cta-bar { display: flex; gap: 16px; max-width: 800px; }
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--rosa); color: #fff;
+    border: none; border-radius: 8px; padding: 12px 24px;
+    font-family: var(--font); font-size: 13px; font-weight: 700;
+    cursor: pointer; text-decoration: none; letter-spacing: 0.05em;
+    box-shadow: 0 4px 16px rgba(242,167,187,0.4);
+  }
+  .cta-btn.outline {
+    background: #fff; color: var(--choco2);
+    border: 1px solid rgba(61,28,2,0.15);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  #s10 .s1-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--choco2); margin-bottom: 20px; opacity: 0.7; }
+
+
+  /* ══════════════════════════════════════════
+     DEMO SLIDES — SHARED
+  ══════════════════════════════════════════ */
+  .demo-slide {
+    background: var(--off); flex-direction: column; padding: 44px 8%;
+  }
+  .demo-slide .slide-header { margin-bottom: 24px; }
+  .demo-layout { display: grid; grid-template-columns: 1fr 1.3fr; gap: 24px; flex: 1; min-height: 0; }
+
+  /* chat mockup */
+  .chat-mock {
+    background: #fff; border: 1px solid rgba(61,28,2,0.08);
+    border-radius: 14px; padding: 18px;
+    display: flex; flex-direction: column; gap: 10px;
+    box-shadow: 0 2px 16px rgba(242,167,187,0.1); overflow: hidden;
+  }
+  .chat-topbar {
+    display: flex; align-items: center; gap: 6px;
+    padding-bottom: 12px; border-bottom: 1px solid rgba(61,28,2,0.07);
+    margin-bottom: 2px;
+  }
+  .chat-topbar .ctdot { width: 8px; height: 8px; border-radius: 50%; }
+  .chat-topbar .ctname { font-size: 11px; font-weight: 700; color: var(--choco2); margin-left: 6px; }
+
+  .bubble-user {
+    background: rgba(242,167,187,0.15); border: 1px solid rgba(242,167,187,0.35);
+    border-radius: 14px 14px 2px 14px; padding: 10px 14px;
+    font-size: 13px; font-weight: 700; color: var(--choco); align-self: flex-end;
+    max-width: 92%; line-height: 1.4;
+  }
+
+  .agent-step {
+    display: flex; gap: 8px; align-items: flex-start;
+    background: rgba(61,28,2,0.03); border-radius: 8px; padding: 8px 10px;
+  }
+  .agent-step .asi { font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+  .agent-step .asb .asn {
+    font-size: 9px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.12em; color: var(--choco2);
+  }
+  .agent-step .asb .asa { font-size: 11px; color: var(--gray); margin-top: 2px; line-height: 1.4; }
+
+  .bubble-bot {
+    background: linear-gradient(135deg, rgba(242,167,187,0.08), rgba(200,168,233,0.08));
+    border: 1px solid rgba(242,167,187,0.25);
+    border-radius: 2px 14px 14px 14px; padding: 10px 14px;
+    font-size: 12px; color: var(--choco2); line-height: 1.5; align-self: flex-start;
+  }
+  .bubble-bot strong { color: var(--choco); }
+
+  /* answer panel */
+  .answer-panel { display: flex; flex-direction: column; gap: 10px; overflow: hidden; }
+  .answer-card {
+    background: #fff; border: 1px solid rgba(61,28,2,0.07);
+    border-radius: 10px; padding: 14px 16px;
+  }
+  .answer-card h4 {
+    font-size: 9px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.15em; color: var(--gray); margin-bottom: 10px;
+  }
+  .answer-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 6px 0; border-bottom: 1px solid rgba(61,28,2,0.05);
+  }
+  .answer-row:last-child { border-bottom: none; }
+  .ar-pos { font-size: 10px; font-weight: 900; color: var(--gray2); width: 16px; text-align: right; flex-shrink: 0; }
+  .ar-name { font-size: 12px; font-weight: 700; color: var(--choco); flex: 1; }
+  .ar-sub { font-size: 10px; color: var(--gray); }
+  .ar-bar { width: 80px; height: 5px; background: rgba(61,28,2,0.07); border-radius: 3px; overflow: hidden; flex-shrink: 0; }
+  .ar-fill { height: 100%; border-radius: 3px; background: var(--rosa); }
+  .ar-val { font-size: 11px; font-weight: 700; color: var(--choco2); min-width: 36px; text-align: right; flex-shrink: 0; }
+
+  .insight-box {
+    background: linear-gradient(135deg, rgba(242,167,187,0.1), rgba(200,168,233,0.08));
+    border: 1px solid rgba(242,167,187,0.3); border-radius: 10px;
+    padding: 14px 16px; display: flex; gap: 10px; align-items: flex-start;
+  }
+  .insight-box .ib-icon { font-size: 20px; flex-shrink: 0; }
+  .insight-box p { font-size: 12px; color: var(--choco2); line-height: 1.6; }
+  .insight-box strong { color: var(--choco); }
+
+  .metric-row { display: flex; gap: 10px; }
+  .metric-chip {
+    flex: 1; background: #fff; border: 1px solid rgba(61,28,2,0.07);
+    border-radius: 8px; padding: 12px 14px; text-align: center;
+  }
+  .metric-chip .mc-val {
+    font-size: clamp(18px, 2vw, 26px); font-weight: 900; color: var(--choco); line-height: 1;
+  }
+  .metric-chip .mc-val.rosa { color: var(--rosa); }
+  .metric-chip .mc-val.lilas { color: #9060C8; }
+  .metric-chip .mc-val.menta { color: #2D8060; }
+  .metric-chip .mc-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gray); margin-top: 4px; }
+
+  .saz-mini { display: flex; align-items: flex-end; gap: 4px; height: 80px; margin: 8px 0 4px; }
+  .saz-mini-bar { flex: 1; border-radius: 3px 3px 0 0; background: rgba(242,167,187,0.25); position: relative; }
+  .saz-mini-bar.peak { background: var(--rosa); }
+  .saz-mini-bar.high { background: rgba(242,167,187,0.55); }
+  .saz-mini-label { font-size: 8px; color: var(--gray); text-align: center; margin-top: 3px; font-weight: 700; text-transform: uppercase; }
+
+  .comp-row { display: flex; flex-direction: column; gap: 8px; }
+  .comp-item { display: flex; align-items: center; gap: 10px; }
+  .comp-name { font-size: 12px; font-weight: 700; color: var(--choco); width: 80px; flex-shrink: 0; }
+  .comp-bar-wrap { flex: 1; height: 20px; background: rgba(61,28,2,0.05); border-radius: 4px; overflow: hidden; }
+  .comp-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; }
+  .comp-fill span { font-size: 10px; font-weight: 700; color: #fff; }
+  .comp-pct { font-size: 12px; font-weight: 700; color: var(--choco2); min-width: 36px; text-align: right; flex-shrink: 0; }
+
+  .review-mini {
+    background: rgba(61,28,2,0.03); border-radius: 8px; padding: 10px 12px;
+    border-left: 3px solid var(--rosa);
+  }
+  .review-mini.pos { border-left-color: var(--menta); }
+  .review-mini .rm-marca { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--choco2); margin-bottom: 3px; }
+  .review-mini .rm-text { font-size: 11px; color: var(--choco); line-height: 1.4; font-style: italic; }
+
+  .demo-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(242,167,187,0.15); border: 1px solid rgba(242,167,187,0.4);
+    border-radius: 20px; padding: 3px 10px; margin-left: auto;
+    font-size: 10px; font-weight: 700; color: var(--choco2);
+  }
+
+  /* ── PRINT / PDF EXPORT ── */
+  @media print {
+    @page { size: 338mm 190mm; margin: 0; }
+    html, body { width: 338mm; height: 190mm; overflow: visible; background: #FFF5E6; }
+    .presentation { width: 338mm; height: auto; position: static; }
+    .slide {
+      display: flex !important;
+      position: relative !important;
+      width: 338mm; height: 190mm;
+      page-break-after: always;
+      break-after: page;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    .nav { display: none !important; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+
+  /* ── REPORT-STYLE DEMO LAYOUT ── */
+  .report-grid {
+    display: grid; grid-template-columns: 1fr 1.15fr; gap: 14px;
+    flex: 1; min-height: 0; overflow: hidden;
+  }
+  .report-col { display: flex; flex-direction: column; gap: 9px; overflow: hidden; }
+  .report-card {
+    background: #fff; border: 1px solid rgba(61,28,2,0.07);
+    border-radius: 10px; padding: 11px 14px; overflow: hidden;
+  }
+  .report-card h4 {
+    font-size: 9px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.15em; color: var(--gray); margin-bottom: 7px;
+  }
+  .report-text { font-size: 11px; color: var(--choco); line-height: 1.65; }
+  .rec-list { display: flex; flex-direction: column; }
+  .rec-item {
+    display: flex; gap: 8px; align-items: flex-start; font-size: 10px;
+    color: var(--choco2); line-height: 1.45; padding: 5px 0;
+    border-bottom: 1px solid rgba(61,28,2,0.05);
+  }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-num { font-size: 11px; font-weight: 900; color: var(--rosa); flex-shrink: 0; min-width: 14px; }
+</style>
+</head>
+<body>
+<div class="presentation">
+
+  <!-- ══ S1 CAPA ══ -->
+  <div class="slide active" id="s1">
+    <div class="accent-bar"></div>
+    <div class="s1-tag">Malu Doces · Retail Intelligence · 2026</div>
+    <h1>Mercado de<br><span>Chocolates</span></h1>
+    <p class="s1-sub">Análise competitiva de sell-out com sistema multi-agente de inteligência de mercado.</p>
+    <div class="meta-bar">
+      <div class="meta-item">
+        <span class="mlabel">Faturamento Total</span>
+        <span class="mvalue">R$ 302 milhões</span>
+      </div>
+      <div class="meta-item">
+        <span class="mlabel">Marcas analisadas</span>
+        <span class="mvalue">20 marcas</span>
+      </div>
+      <div class="meta-item">
+        <span class="mlabel">Reviews processadas</span>
+        <span class="mvalue">802 reviews</span>
+      </div>
+      <div class="meta-item">
+        <span class="mlabel">Período</span>
+        <span class="mvalue">Jan–Dez 2025</span>
+      </div>
+    </div>
+    <div class="deco-circle"></div>
+    <div class="deco-dot"></div>
+    <div class="brand-badge" style="top:32px;right:48px;">
+      <span class="bname">Malu Doces</span>
+      <div class="bbar"></div>
+    </div>
+  </div>
+
+  <!-- ══ S2 AGENDA ══ -->
+  <div class="slide" id="s2">
+    <div class="brand-badge"><span class="bname">Malu Doces</span><div class="bbar"></div></div>
+    <div class="slide-header">
+      <span class="tag">Agenda</span>
+      <h2>O que vamos ver</h2>
+      <div class="line"></div>
+    </div>
+    <div class="agenda-grid">
+      <div class="agenda-item">
+        <div class="anum">01</div>
+        <div>
+          <div class="atext">Visão Geral do Mercado</div>
+          <div class="asub">KPIs, volume e faturamento total</div>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="anum">02</div>
+        <div>
+          <div class="atext">Ranking de Marcas</div>
+          <div class="asub">Share, faturamento e posicionamento por segmento</div>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="anum">03</div>
+        <div>
+          <div class="atext">Canais de Distribuição</div>
+          <div class="asub">Supermercado, farmácia, atacado e conveniência</div>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="anum">04</div>
+        <div>
+          <div class="atext">Sazonalidade</div>
+          <div class="asub">Picos mensais, Páscoa e Natal</div>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="anum">05</div>
+        <div>
+          <div class="atext">Voz do Consumidor</div>
+          <div class="asub">Sentimento, elogios e reclamações via RAG</div>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="anum">06</div>
+        <div>
+          <div class="atext">Oportunidades &amp; Próximos Passos</div>
+          <div class="asub">Gaps identificados e recomendações priorizadas</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ S3 VISÃO GERAL ══ -->
+  <div class="slide" id="s3">
+    <div class="brand-badge"><span class="bname">Malu Doces</span><div class="bbar"></div></div>
+    <div class="slide-header">
+      <span class="tag">Visão Geral</span>
+      <h2>Mercado em Números</h2>
+      <div class="line"></div>
+    </div>
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">Faturamento Total</div>
+        <div class="kpi-value">R$ 302M</div>
+        <div class="kpi-sub">Sell-out acumulado Jan–Dez 2025</div>
+      </div>
+      <div class="kpi-card lilas">
+        <div class="kpi-label">Unidades Vendidas</div>
+        <div class="kpi-value">47M un</div>
+        <div class="kpi-sub">Pico em Abril com 6,0M unidades</div>
+      </div>
+      <div class="kpi-card menta">
+        <div class="kpi-label">Marcas Ativas</div>
+        <div class="kpi-value">20</div>
+        <div class="kpi-sub">3 segmentos: popular, masstige e premium</div>
+      </div>
+      <div class="kpi-card choco">
+        <div class="kpi-label">Reviews Analisadas</div>
+        <div class="kpi-value">802</div>
+        <div class="kpi-sub">60% positivas · 20% neutras · 20% negativas</div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="info-block">
+        <h4>Top 5 marcas por faturamento</h4>
+        <div class="info-row"><span class="iname">Lacta (Mondelēz)</span><span class="ivalue">R$ 52,9M</span><span class="ibadge">17,5%</span></div>
+        <div class="info-row"><span class="iname">Bis (Mondelēz)</span><span class="ivalue">R$ 46,8M</span><span class="ibadge">15,5%</span></div>
+        <div class="info-row"><span class="iname">Kit Kat (Nestlé)</span><span class="ivalue">R$ 37,7M</span><span class="ibadge">12,5%</span></div>
+        <div class="info-row"><span class="iname">Prestígio (Nestlé)</span><span class="ivalue">R$ 19,1M</span><span class="ibadge">6,3%</span></div>
+        <div class="info-row"><span class="iname">Sonho de Valsa</span><span class="ivalue">R$ 18,4M</span><span class="ibadge">6,1%</span></div>
+      </div>
+      <div class="info-block">
+        <h4>Performance por canal</h4>
+        <div class="info-row"><span class="iname">Supermercado</span><span class="ivalue">R$ 178,7M</span><span class="ibadge">59,1%</span></div>
+        <div class="info-row"><span class="iname">Farmácia</span><span class="ivalue">R$ 49,8M</span><span class="ibadge">16,5%</span></div>
+        <div class="info-row"><span class="iname">Atacado</span><span class="ivalue">R$ 46,5M</span><span class="ibadge">15,4%</span></div>
+        <div class="info-row"><span class="iname">Conveniência</span><span class="ivalue">R$ 27,2M</span><span class="ibadge alert">9,0%</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ S4 RANKING ══ -->
+  <div class="slide" id="s4">
+    <div class="brand-badge"><span class="bname">Malu Doces</span><div class="bbar"></div></div>
+    <div class="slide-header">
+      <span class="tag">Ranking</span>
+      <h2>Marcas por Faturamento &amp; Share</h2>
+      <div class="line"></div>
+    </div>
+    <div class="ranking-grid">
+      <div class="rank-list">
+        <div class="rank-item top1">
+          <span class="rank-pos gold">1</span>
+          <div style="flex:1"><div class="rank-name">Lacta</div><div class="rank-fab">Mondelēz · Popular</div></div>
+          <div class="rank-bar-wrap"><div class="rank-bar" style="width:100%"></div></div>
+          <span class="rank-share">17,5%</span>
+          <span class="rank-fat">R$ 52,9M</span>
+        </div>
+        <div class="rank-item top2">
+          <span class="rank-pos silver">2</span>
+          <div style="flex:1"><div class="rank-name">Bis</div><div class="rank-fab">Mondelēz · Popular</div></div>
+          <div class="rank-bar-wrap"><div class="rank-bar" style="width:88%;background:var(--lilas)"></div></div>
+          <span class="rank-share">15,5%</span>
+          <span class="rank-fat">R$ 46,8M</span>
+        </div>
+        <div class="rank-item top3">
+          <span class="rank-pos bronze">3</span>
+          <div style="flex:1"><div class="rank-name">Kit Kat</div><div class="rank-fab">Nestlé · Masstige</div></div>
+          <div class="rank-bar-wrap"><div class="rank-bar" style="width:71%;background:var(--menta)"></div></div>
+          <span class="rank-share">12,5%</span>
+          <span class="rank-fat">R$ 37,7M</span>
+        </div>
+        <div class="rank-item">
+          <span class="rank-pos">4</span>
+          <div style="flex:1"><div class="rank-name">Prestígio</div><div class="rank-fab">Nestlé · Popular</div></div>
+          <div class="rank-bar-wrap"><div class="rank-bar" style="width:36%"></div></div>
+          <span class="rank-share">6,3%</span>
+          <span class="rank-fat">R$ 19,1M</span>
+        </div>
+        <div class="rank-item">
+          <span class="rank-pos">5</span>
+          <div style="flex:1"><div class="rank-name">Sonho de Valsa</div><div class="rank-fab">Mondelēz · Masstige</div></div>
+          <div class="rank-bar-wrap"><div class="rank-bar" style="width:34%"></div></div>
+          <span class="rank-share">6,1%</span>
+          <span class="rank-fat">R$ 18,4M</span>
+        </div>
+        <div class="rank-item">
+          <span class="rank-pos">6</span>
+          <div style="flex:1"><div class="rank-name">Ouro Branco</div><div class="rank-fab">Mondelēz · Masstige</div></div>
+          <div class="rank-bar-wrap"><div class="rank-bar" style="width:30%"></div></div>
+          <span class="rank-share">5,3%</span>
+          <span class="rank-fat">R$ 15,9M</span>
+        </div>
+        <div class="rank-item">
+          <span class="rank-pos">7</span>
+          <div style="flex:1"><div class="rank-name">Bon o Bon</div><div class="rank-fab">Arcor · Popular</div></div>
+          <div class="rank-bar-wrap"><div class="rank-bar" style="width:24%"></div></div>
+          <span class="rank-share">4,3%</span>
+          <span class="rank-fat">R$ 13,0M</span>
+        </div>
+        <div class="rank-item">
+          <span class="rank-pos">8</span>
+          <div style="flex:1"><div class="rank-name">Hersheys</div><div class="rank-fab">Hersheys · Masstige</div></div>
+          <div class="rank-bar-wrap"><div class="rank-bar" style="width:23%"></div></div>
+          <span class="rank-share">4,2%</span>
+          <span class="rank-fat">R$ 12,6M</span>
+        </div>
+      </div>
+      <div class="seg-panel">
+        <div class="seg-card">
+          <h4>Share por segmento</h4>
+          <div class="seg-row">
+            <div class="seg-dot" style="background:var(--rosa)"></div>
+            <span class="seg-label">Popular</span>
+            <div class="seg-pbar"><div class="seg-pfill" style="width:62%;background:var(--rosa)"></div></div>
+            <span class="seg-val">62%</span>
+          </div>
+          <div class="seg-row">
+            <div class="seg-dot" style="background:var(--lilas)"></div>
+            <span class="seg-label">Masstige</span>
+            <div class="seg-pbar"><div class="seg-pfill" style="width:31%;background:var(--lilas)"></div></div>
+            <span class="seg-val">31%</span>
+          </div>
+          <div class="seg-row">
+            <div class="seg-dot" style="background:var(--menta)"></div>
+            <span class="seg-label">Premium</span>
+            <div class="seg-pbar"><div class="seg-pfill" style="width:7%;background:var(--menta)"></div></div>
+            <span class="seg-val">7%</span>
+          </div>
+        </div>
+        <div class="seg-card">
+          <h4>Share por fabricante</h4>
+          <div class="seg-row">
+            <div class="seg-dot" style="background:var(--rosa)"></div>
+            <span class="seg-label">Mondelēz</span>
+            <div class="seg-pbar"><div class="seg-pfill" style="width:51%;background:var(--rosa)"></div></div>
+            <span class="seg-val">51%</span>
+          </div>
+          <div class="seg-row">
+            <div class="seg-dot" style="background:var(--lilas)"></div>
+            <span class="seg-label">Nestlé</span>
+            <div class="seg-pbar"><div class="seg-pfill" style="width:29%;background:var(--lilas)"></div></div>
+            <span class="seg-val">29%</span>
+          </div>
+          <div class="seg-row">
+            <div class="seg-dot" style="background:var(--menta)"></div>
+            <span class="seg-label">Hersheys</span>
+            <div class="seg-pbar"><div class="seg-pfill" style="width:6%;background:var(--menta)"></div></div>
+            <span class="seg-val">6%</span>
+          </div>
+          <div class="seg-row">
+            <div class="seg-dot" style="background:var(--choco3)"></div>
+            <span class="seg-label">Outros</span>
+            <div class="seg-pbar"><div class="seg-pfill" style="width:14%;background:var(--choco3)"></div></div>
+            <span class="seg-val">14%</span>
+          </div>
+        </div>
+        <div class="seg-card" style="background:rgba(242,167,187,0.08);border-color:rgba(242,167,187,0.3)">
+          <h4>Destaque da análise</h4>
+          <p style="font-size:13px;color:var(--choco2);line-height:1.6">
+            <strong style="color:var(--choco)">Mondelēz domina com 51% do mercado</strong> somando Lacta + Bis + Sonho de Valsa + Ouro Branco + Diamante Negro. Kit Kat (Nestlé) é o <strong style="color:var(--choco)">maior outlier premium-masstige</strong>, com 12,5% de share acima de toda a Nestlé chocolates tradicionais combinadas.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ S5 CANAIS ══ -->
+  <div class="slide" id="s5">
+    <div class="brand-badge"><span class="bname">Malu Doces</span><div class="bbar"></div></div>
+    <div class="slide-header">
+      <span class="tag">Distribuição</span>
+      <h2>Performance por Canal de Venda</h2>
+      <div class="line"></div>
+    </div>
+    <div class="canal-grid">
+      <div class="canal-card c1">
+        <div class="canal-icon">🛒</div>
+        <div class="canal-name">Supermercado</div>
+        <div class="canal-fat">R$ 178,7M</div>
+        <div class="canal-share">59,1% do faturamento</div>
+        <div class="canal-bar"></div>
+      </div>
+      <div class="canal-card c2">
+        <div class="canal-icon">💊</div>
+        <div class="canal-name">Farmácia</div>
+        <div class="canal-fat">R$ 49,8M</div>
+        <div class="canal-share">16,5% do faturamento</div>
+        <div class="canal-bar"></div>
+      </div>
+      <div class="canal-card c3">
+        <div class="canal-icon">📦</div>
+        <div class="canal-name">Atacado</div>
+        <div class="canal-fat">R$ 46,5M</div>
+        <div class="canal-share">15,4% do faturamento</div>
+        <div class="canal-bar"></div>
+      </div>
+      <div class="canal-card c4">
+        <div class="canal-icon">⛽</div>
+        <div class="canal-name">Conveniência</div>
+        <div class="canal-fat">R$ 27,2M</div>
+        <div class="canal-share">9,0% do faturamento</div>
+        <div class="canal-bar"></div>
+      </div>
+    </div>
+    <div class="canal-insight">
+      <div class="ci-icon">💡</div>
+      <p>
+        <strong>Supermercado responde por 6 em cada 10 reais</strong> vendidos no mercado de chocolates. Farmácia e Atacado têm participações próximas (~16% cada), indicando oportunidade de diferenciação de mix por canal. <strong>Conveniência permanece subexplorada</strong> — chocolates individuais e impulso têm margem alta nesse canal.
+      </p>
+    </div>
+  </div>
+
+  <!-- ══ S6 SAZONALIDADE ══ -->
+  <div class="slide" id="s6">
+    <div class="brand-badge"><span class="bname">Malu Doces</span><div class="bbar"></div></div>
+    <div class="slide-header">
+      <span class="tag">Sazonalidade</span>
+      <h2>Vendas Mensais por Unidades</h2>
+      <div class="line"></div>
+    </div>
+    <div class="saz-layout">
+      <div style="display:flex;flex-direction:column;gap:8px;flex:1">
+        <div class="saz-bars">
+          <!-- Jan=2.5M Fev=2.4M Mar=4.1M Abr=6.0M Mai=3.0M Jun=4.6M Jul=3.0M Ago=3.0M Set=3.0M Out=4.5M Nov=3.6M Dez=5.4M -->
+          <div class="saz-bar-wrap">
+            <div class="saz-bar" style="height:42%"><span class="saz-v">2,5</span></div>
+            <div class="saz-month">jan</div>
+          </div>
+          <div class="saz-bar-wrap">
+            <div class="saz-bar" style="height:40%"><span class="saz-v">2,4</span></div>
+            <div class="saz-month">fev</div>
+          </div>
+          <div class="saz-bar-wrap">
+            <div class="saz-bar high" style="height:68%"><span class="saz-v">4,1</span></div>
+            <div class="saz-month">mar</div>
+          </div>
+          <div class="saz-bar-wrap">
+            <div class="saz-bar peak" style="height:100%"><span class="saz-v" style="color:#fff">6,0</span></div>
+            <div class="saz-month" style="color:var(--rosa);font-weight:900">abr</div>
+          </div>
+          <div class="saz-bar-wrap">
+            <div class="saz-bar" style="height:50%"><span class="saz-v">3,0</span></div>
+            <div class="saz-month">mai</div>
+          </div>
+          <div class="saz-bar-wrap">
+            <div class="saz-bar high" style="height:76%"><span class="saz-v">4,6</span></div>
+            <div class="saz-month">jun</div>
+          </div>
+          <div class="saz-bar-wrap">
+            <div class="saz-bar" style="height:50%"><span class="saz-v">3,0</span></div>
+            <div class="saz-month">jul</div>
+          </div>
+          <div class="saz-bar-wrap">
+            <div class="saz-bar" style="height:50%"><span class="saz-v">3,0</span></div>
+            <div class="saz-month">ago</div>
+          </div>
+          <div class="saz-bar-wrap">
+            <div class="saz-bar" style="height:50%"><span class="saz-v">3,0</span></div>
+            <div class="saz-month">set</div>
+          </div>
+          <div class="saz-bar-wrap">
+            <div class="saz-bar high" style="height:75%"><span class="saz-v">4,5</span></div>
+            <div class="saz-month">out</div>
+          </div>
+          <div class="saz-bar-wrap">
+            <div class="saz-bar" style="height:59%"><span class="saz-v">3,6</span></div>
+            <div class="saz-month">nov</div>
+          </div>
+          <div class="saz-bar-wrap">
+            <div class="saz-bar peak" style="height:90%;background:rgba(242,167,187,0.7)"><span class="saz-v">5,4</span></div>
+            <div class="saz-month" style="color:var(--choco2);font-weight:900">dez</div>
+          </div>
+        </div>
+        <div class="saz-axis"></div>
+        <div style="font-size:10px;color:var(--gray);margin-top:4px">Unidades vendidas (milhões) — Jan–Dez 2025</div>
+      </div>
+      <div class="saz-insights">
+        <div class="saz-insight-card">
+          <div class="sic-icon">🐣</div>
+          <div>
+            <div class="sac-title">Páscoa — Pico absoluto</div>
+            <div class="sac-desc">Abril registra 6,0M unidades — <strong>+147%</strong> vs. Janeiro (menor mês). Ovos de Páscoa e kits de presente impulsionam o sell-out.</div>
+            <span class="sac-tag">Abr: 6,0M un</span>
+          </div>
+        </div>
+        <div class="saz-insight-card">
+          <div class="sic-icon">🎄</div>
+          <div>
+            <div class="sac-title">Natal — 2º maior pico</div>
+            <div class="sac-desc">Dezembro com 5,4M unidades. Caixas de bombom e kits de presente dominam o mix de Dezembro.</div>
+            <span class="sac-tag">Dez: 5,4M un</span>
+          </div>
+        </div>
+        <div class="saz-insight-card">
+          <div class="sic-icon">❄️</div>
+          <div>
+            <div class="sac-title">Junho — Festa Junina</div>
+            <div class="sac-desc">Terceiro pico com 4,6M unidades. Paçoca e pés-de-moleque impulsionam o chocolatado nos kits juninos.</div>
+            <span class="sac-tag">Jun: 4,6M un</span>
+          </div>
+        </div>
+        <div class="saz-insight-card">
+          <div class="sic-icon">📉</div>
+          <div>
+            <div class="sac-title">Jan–Fev — Vale de vendas</div>
+            <div class="sac-desc">Menor demanda do ano. Oportunidade de ativação de preço e presença de gôndola.</div>
+            <span class="sac-tag" style="background:rgba(242,167,187,0.2)">Média: 2,5M un</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ S7 VOZ DO CONSUMIDOR ══ -->
+  <div class="slide" id="s7">
+    <div class="brand-badge"><span class="bname">Malu Doces</span><div class="bbar"></div></div>
+    <div class="slide-header">
+      <span class="tag">Voz do Consumidor</span>
+      <h2>O que 802 reviews dizem</h2>
+      <div class="line"></div>
+    </div>
+    <div class="voz-layout">
+      <div class="sentiment-panel">
+        <h4>Distribuição de sentimento</h4>
+        <div class="sent-item">
+          <div class="sent-label">
+            <span class="sent-name">Positivo</span>
+            <span class="sent-pct pos">60%</span>
+          </div>
+          <div class="sent-bar"><div class="sent-fill fill-pos" style="width:60%"></div></div>
+        </div>
+        <div class="sent-item">
+          <div class="sent-label">
+            <span class="sent-name">Neutro</span>
+            <span class="sent-pct neu">20%</span>
+          </div>
+          <div class="sent-bar"><div class="sent-fill fill-neu" style="width:20%"></div></div>
+        </div>
+        <div class="sent-item">
+          <div class="sent-label">
+            <span class="sent-name">Negativo</span>
+            <span class="sent-pct neg">20%</span>
+          </div>
+          <div class="sent-bar"><div class="sent-fill fill-neg" style="width:20%"></div></div>
+        </div>
+        <div style="border-top:1px solid rgba(61,28,2,0.08);padding-top:16px">
+          <h4 style="margin-bottom:10px">Temas mais citados</h4>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;justify-content:space-between;font-size:12px">
+              <span style="color:var(--choco2)">Sabor / Textura</span>
+              <span style="font-weight:700;color:#2D8060">Elogio</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:12px">
+              <span style="color:var(--choco2)">Embalagem</span>
+              <span style="font-weight:700;color:var(--choco3)">Misto</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:12px">
+              <span style="color:var(--choco2)">Entrega / Derretimento</span>
+              <span style="font-weight:700;color:#A03050">Alerta</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:12px">
+              <span style="color:var(--choco2)">Preço</span>
+              <span style="font-weight:700;color:var(--choco3)">Misto</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reviews-panel">
+        <div class="review-card pos">
+          <div class="rv-meta">
+            <div class="rv-marca">Hersheys</div>
+            <div class="rv-stars">⭐⭐⭐⭐⭐</div>
+          </div>
+          <div class="rv-quote">"O recheio é o destaque. Combina muito bem com o chocolate ao leite. Meu favorito desde criança."</div>
+          <span class="rv-tag elogio">Sabor</span>
+        </div>
+        <div class="review-card pos">
+          <div class="rv-meta">
+            <div class="rv-marca">Lacta</div>
+            <div class="rv-stars">⭐⭐⭐⭐⭐</div>
+          </div>
+          <div class="rv-quote">"Clássico de sempre, consistente e saboroso. Não decepciona. Textura perfeita, derrete na medida certa."</div>
+          <span class="rv-tag elogio">Textura</span>
+        </div>
+        <div class="review-card neg">
+          <div class="rv-meta">
+            <div class="rv-marca">Unique</div>
+            <div class="rv-stars">⭐⭐</div>
+          </div>
+          <div class="rv-quote">"Embalagem bonita mas o chocolate estava derretido na entrega. Produto premium que não chega premium."</div>
+          <span class="rv-tag alerta">Entrega</span>
+        </div>
+        <div class="review-card neg">
+          <div class="rv-meta">
+            <div class="rv-marca">Ferrero Rocher</div>
+            <div class="rv-stars">⭐⭐</div>
+          </div>
+          <div class="rv-quote">"Produto chegou derretido. A embalagem não protege adequadamente em temperaturas acima de 30°C."</div>
+          <span class="rv-tag alerta">Logística</span>
+        </div>
+        <div class="review-card pos">
+          <div class="rv-meta">
+            <div class="rv-marca">Serenata de Amor</div>
+            <div class="rv-stars">⭐⭐⭐⭐</div>
+          </div>
+          <div class="rv-quote">"Nostálgico. Preço acessível e sabor consistente. Ótimo para presentear sem gastar muito."</div>
+          <span class="rv-tag elogio">Custo-benefício</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ S8 ARQUITETURA ══ -->
+  <div class="slide" id="s8">
+    <div class="brand-badge" style="top:32px;right:48px;">
+      <span class="bname">Malu Doces</span>
+      <div class="bbar"></div>
+    </div>
+    <div class="slide-header">
+      <span class="tag">Arquitetura</span>
+      <h2>3 agentes, 2 memórias — como o sistema pensa</h2>
+      <div class="line"></div>
+    </div>
+
+    <div class="arch-layout">
+
+      <!-- AGENTE 1: SalesAnalyst -->
+      <div class="arch-agent highlight">
+        <div class="arch-agent-icon">📊</div>
+        <div class="arch-agent-name">SalesAnalyst</div>
+        <div class="arch-agent-role">Analista de Sell-Out</div>
+        <div class="arch-agent-tool">
+          <span class="arch-tool-chip">🗄️ Postgres · The Ledger</span>
+          <span class="arch-tool-chip">🔧 postgres_execute_sql</span>
+        </div>
+        <div class="arch-agent-desc">
+          Recebe a pergunta e gera SQL automaticamente. Faz JOINs entre as tabelas <strong>vendas → skus → marcas → lojas</strong> para retornar rankings, share de mercado, sazonalidade e comparativos por canal. Opera apenas com fatos — números exatos vindos do banco de dados.
+        </div>
+        <div class="arch-agent-desc" style="border-top:none;padding-top:0;color:var(--choco2);font-style:italic">
+          "Quais são as 5 marcas com maior faturamento?"
+        </div>
+      </div>
+
+      <div class="arch-arrow">
+        <div class="arr">→</div>
+        <div class="arr-label">KPIs +<br>Rankings</div>
+      </div>
+
+      <!-- AGENTE 2: MarketResearcher -->
+      <div class="arch-agent highlight">
+        <div class="arch-agent-icon">🔍</div>
+        <div class="arch-agent-name">MarketResearcher</div>
+        <div class="arch-agent-role">Pesquisador de Mercado</div>
+        <div class="arch-agent-tool">
+          <span class="arch-tool-chip">🧠 Qdrant · The Memory</span>
+          <span class="arch-tool-chip">🔧 qdrant_semantic_search</span>
+        </div>
+        <div class="arch-agent-desc">
+          Converte a pergunta em embedding e busca os reviews mais semanticamente próximos no Qdrant. Não usa palavra-chave — entende o <strong>significado</strong> da pergunta. Extrai sentimento, atributos elogiados (embalagem, textura, recheio) e reclamações recorrentes (derretimento, qualidade).
+        </div>
+        <div class="arch-agent-desc" style="border-top:none;padding-top:0;color:var(--choco2);font-style:italic">
+          "O que consumidores falam sobre o Kit Kat?"
+        </div>
+      </div>
+
+      <div class="arch-arrow">
+        <div class="arr">→</div>
+        <div class="arr-label">Reviews +<br>Sentimento</div>
+      </div>
+
+      <!-- AGENTE 3: Reporter -->
+      <div class="arch-agent" style="border-color:rgba(168,216,200,0.6);background:#F5FBF8">
+        <div class="arch-agent-icon">✍️</div>
+        <div class="arch-agent-name" style="color:#2D8060">Reporter</div>
+        <div class="arch-agent-role" style="color:#2D8060">Repórter Executivo</div>
+        <div class="arch-agent-tool">
+          <span class="arch-tool-chip" style="background:rgba(168,216,200,0.2);border-color:rgba(168,216,200,0.5);color:#2D8060">⚡ Groq · Llama 3.3 70B</span>
+          <span class="arch-tool-chip" style="background:rgba(168,216,200,0.2);border-color:rgba(168,216,200,0.5);color:#2D8060">📄 Relatório Markdown</span>
+        </div>
+        <div class="arch-agent-desc" style="border-top-color:rgba(168,216,200,0.3)">
+          Recebe os outputs dos dois agentes como contexto e sintetiza o relatório final: KPIs, ranking completo, sazonalidade, voz do consumidor e recomendações priorizadas com prazos. <strong>Não acessa banco de dados</strong> — apenas raciocina sobre o que SalesAnalyst e MarketResearcher trouxeram.
+        </div>
+        <div class="arch-agent-desc" style="border-top:none;padding-top:0;color:#2D8060;font-style:italic">
+          Produz: Resumo Executivo + KPIs + Oportunidades
+        </div>
+      </div>
+    </div>
+
+    <!-- DATA STORES ROW -->
+    <div class="arch-stores">
+      <div class="arch-store-card">
+        <div class="arch-store-title">🗄️ The Ledger — Postgres 16</div>
+        <div class="arch-store-desc">Dados estruturados de sell-out. Responde: quanto vendeu, quando, em qual canal e por qual preço.</div>
+        <div class="arch-store-items">
+          <span class="arch-store-tag">vendas</span>
+          <span class="arch-store-tag">skus</span>
+          <span class="arch-store-tag">marcas</span>
+          <span class="arch-store-tag">lojas</span>
+          <span class="arch-store-tag">341,9M faturamento</span>
+        </div>
+      </div>
+      <div class="arch-store-card">
+        <div class="arch-store-title">🧠 The Memory — Qdrant 1.8</div>
+        <div class="arch-store-desc">Reviews convertidos em vetores. Busca por significado — não por palavra-chave. Captura a voz do consumidor.</div>
+        <div class="arch-store-items">
+          <span class="arch-store-tag">reviews</span>
+          <span class="arch-store-tag">sentimento</span>
+          <span class="arch-store-tag">embeddings</span>
+          <span class="arch-store-tag">60% positivo</span>
+        </div>
+      </div>
+      <div class="arch-store-card">
+        <div class="arch-store-title">💬 Interface — Chainlit 2.11</div>
+        <div class="arch-store-desc">Chat conversacional com visibilidade em tempo real de cada passo dos agentes — SQL executado, reviews buscados, relatório gerado.</div>
+        <div class="arch-store-items">
+          <span class="arch-store-tag">chat</span>
+          <span class="arch-store-tag">steps visíveis</span>
+          <span class="arch-store-tag">async</span>
+          <span class="arch-store-tag">streaming</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="arch-bottom">
+      <div class="arch-stack-chip">🤖 CrewAI 1.14</div>
+      <div class="arch-stack-chip">⚡ Groq · Llama 3.3 70B</div>
+      <div class="arch-stack-chip">🗄️ Postgres 16</div>
+      <div class="arch-stack-chip">🧠 Qdrant 1.8</div>
+      <div class="arch-stack-chip">💬 Chainlit 2.11</div>
+      <div class="arch-stack-chip">🐍 Python 3.12</div>
+      <div class="arch-stack-chip">🔄 ShadowTraffic</div>
+    </div>
+  </div>
+
+  <!-- ══ S9 OPORTUNIDADES ══ -->
+  <div class="slide" id="s9">
+    <div class="brand-badge"><span class="bname">Malu Doces</span><div class="bbar"></div></div>
+    <div class="slide-header">
+      <span class="tag">Oportunidades</span>
+      <h2>Gaps Identificados pela IA</h2>
+      <div class="line"></div>
+    </div>
+    <div class="opp-grid">
+      <div class="opp-card">
+        <div class="opp-num">01</div>
+        <div class="opp-title">Canal Conveniência Subexplorado</div>
+        <div class="opp-desc">Com apenas 9% do faturamento, o canal de conveniência tem margem por unitário acima da média. Chocolates de impulso (Bis, Charge, Bon o Bon) têm fit natural para esse canal.</div>
+        <div class="opp-data">Conveniência: <span>R$ 27,2M</span> · 9,0% share · vs. 59% Supermercado</div>
+      </div>
+      <div class="opp-card">
+        <div class="opp-num">02</div>
+        <div class="opp-title">Logística Premium sem Proteção</div>
+        <div class="opp-desc">Marcas premium (Unique, Ferrero Rocher) acumulam reviews negativas por derretimento na entrega. Oportunidade de embalagem térmica e acordos de SLA de temperatura com transportadoras.</div>
+        <div class="opp-data">Reviews negativas de logística: <span>20% do total</span> · Concentradas em Premium</div>
+      </div>
+      <div class="opp-card">
+        <div class="opp-num">03</div>
+        <div class="opp-title">Janeiro–Fevereiro sem Ativação</div>
+        <div class="opp-desc">O vale de vendas pós-Natal (Jan–Fev) registra menos de 2,5M unidades/mês — menos da metade do pico de Abril. Campanhas de impulso e promoções de gôndola podem ativar essa janela.</div>
+        <div class="opp-data">Jan–Fev média: <span>2,5M un</span> · vs. Abril: <span>6,0M un</span> · Gap: <span>-58%</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ D1 DEMO: PLANOGRAMA ══ -->
+  <div class="slide demo-slide" id="d1">
+    <div class="brand-badge"><span class="bname">Malu Doces</span><div class="bbar"></div></div>
+    <div class="slide-header">
+      <span class="tag">Demo 01</span>
+      <h2>Qual marca priorizar no planograma da gôndola?</h2>
+      <div class="line"></div>
+      <div class="demo-badge">📋 Resposta real do crew</div>
+    </div>
+    <div class="report-grid">
+
+      <!-- COLUNA ESQUERDA -->
+      <div class="report-col">
+        <div class="report-card">
+          <h4>Resumo Executivo</h4>
+          <p class="report-text">A <strong>Lacta lidera</strong> o faturamento com R$&nbsp;52.970.507,54 — única marca com mais de 17% de share. Rating médio de <strong>4,5/5</strong>. Consumidores elogiam recheio e embalagem, mas alertam para preço percebido como abusivo e redução de tamanho. O top-3 (Lacta + Bis + Kit Kat) concentra <strong>45,5% do faturamento total</strong> e deve ocupar o eye-level da gôndola.</p>
+        </div>
+        <div class="metric-row">
+          <div class="metric-chip">
+            <div class="mc-val">R$&nbsp;52,9M</div>
+            <div class="mc-label">Faturamento Lacta</div>
+          </div>
+          <div class="metric-chip">
+            <div class="mc-val rosa">4,5★</div>
+            <div class="mc-label">Rating médio</div>
+          </div>
+          <div class="metric-chip">
+            <div class="mc-val menta">60%</div>
+            <div class="mc-label">Sentimento positivo</div>
+          </div>
+        </div>
+        <div class="report-card" style="flex:1">
+          <h4>Voz do Consumidor — Lacta</h4>
+          <div class="review-mini pos" style="margin-bottom:6px">
+            <div class="rm-marca">⭐ Recheio e sabor</div>
+            <div class="rm-text">"O recheio é o destaque. Combina muito bem com o chocolate ao leite."</div>
+          </div>
+          <div class="review-mini pos" style="margin-bottom:6px">
+            <div class="rm-marca">⭐ Embalagem — fator de impulso</div>
+            <div class="rm-text">"Embalagem bonita. Gera impulso de compra direto na gôndola."</div>
+          </div>
+          <div class="review-mini" style="margin-bottom:6px">
+            <div class="rm-marca">⚠ Preço percebido como abusivo</div>
+            <div class="rm-text">"Preco abusivo para um chocolate tao comum."</div>
+          </div>
+          <div class="review-mini">
+            <div class="rm-marca">⚠ Percepção de redução de tamanho</div>
+            <div class="rm-text">"Produto bom mas achei o tamanho menor do que antes. Reduziram?"</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLUNA DIREITA -->
+      <div class="report-col">
+        <div class="report-card" style="flex:1">
+          <h4>Ranking por faturamento bruto — Total: R$&nbsp;341.946.152,90 · 20 marcas</h4>
+          <div class="answer-row"><span class="ar-pos">1</span><div style="flex:1"><div class="ar-name">Lacta</div><div class="ar-sub">Mondelēz · 17,53%</div></div><div class="ar-bar"><div class="ar-fill" style="width:100%"></div></div><span class="ar-val">R$&nbsp;52,9M</span></div>
+          <div class="answer-row"><span class="ar-pos">2</span><div style="flex:1"><div class="ar-name">Bis</div><div class="ar-sub">Mondelēz · 15,49%</div></div><div class="ar-bar"><div class="ar-fill" style="width:88%"></div></div><span class="ar-val">R$&nbsp;46,8M</span></div>
+          <div class="answer-row"><span class="ar-pos">3</span><div style="flex:1"><div class="ar-name">Kit Kat</div><div class="ar-sub">Nestlé · 12,48%</div></div><div class="ar-bar"><div class="ar-fill" style="width:71%"></div></div><span class="ar-val">R$&nbsp;37,7M</span></div>
+          <div class="answer-row"><span class="ar-pos">4</span><div style="flex:1"><div class="ar-name">Prestígio</div><div class="ar-sub">Nestlé · 6,33%</div></div><div class="ar-bar"><div class="ar-fill" style="width:36%"></div></div><span class="ar-val">R$&nbsp;19,1M</span></div>
+          <div class="answer-row"><span class="ar-pos">5</span><div style="flex:1"><div class="ar-name">Sonho de Valsa</div><div class="ar-sub">Mondelēz · 6,08%</div></div><div class="ar-bar"><div class="ar-fill" style="width:35%"></div></div><span class="ar-val">R$&nbsp;18,4M</span></div>
+          <div class="answer-row"><span class="ar-pos">6</span><div style="flex:1"><div class="ar-name">Ouro Branco</div><div class="ar-sub">Mondelēz · 5,27%</div></div><div class="ar-bar"><div class="ar-fill" style="width:30%"></div></div><span class="ar-val">R$&nbsp;15,9M</span></div>
+          <div class="answer-row"><span class="ar-pos">7</span><div style="flex:1"><div class="ar-name">Bon o Bon</div><div class="ar-sub">Arcor · 4,30%</div></div><div class="ar-bar"><div class="ar-fill" style="width:25%"></div></div><span class="ar-val">R$&nbsp;13,0M</span></div>
+          <div class="answer-row"><span class="ar-pos">8</span><div style="flex:1"><div class="ar-name">Hershey's</div><div class="ar-sub">Hershey's · 4,17%</div></div><div class="ar-bar"><div class="ar-fill" style="width:24%"></div></div><span class="ar-val">R$&nbsp;12,6M</span></div>
+          <div class="answer-row"><span class="ar-pos">9</span><div style="flex:1"><div class="ar-name">Ferrero Rocher</div><div class="ar-sub">Ferrero · 4,02%</div></div><div class="ar-bar"><div class="ar-fill" style="width:23%"></div></div><span class="ar-val">R$&nbsp;12,2M</span></div>
+          <div class="answer-row"><span class="ar-pos">10</span><div style="flex:1"><div class="ar-name">Garoto Bombom</div><div class="ar-sub">Nestlé · 3,08%</div></div><div class="ar-bar"><div class="ar-fill" style="width:18%"></div></div><span class="ar-val">R$&nbsp;9,3M</span></div>
+        </div>
+        <div class="report-card">
+          <h4>Recomendações do Crew</h4>
+          <div class="rec-list">
+            <div class="rec-item"><span class="rec-num">1</span><span><strong>Priorizar Lacta no eye-level</strong> com Bis e Kit Kat — top-3 representa 45,5% do faturamento. Prazo: imediato.</span></div>
+            <div class="rec-item"><span class="rec-num">2</span><span><strong>Estudar percepção de preço</strong> — reclamações de custo e redução de tamanho podem erodir fidelidade. Prazo: 2 meses.</span></div>
+            <div class="rec-item"><span class="rec-num">3</span><span><strong>Monitorar reclamações sobre formulação</strong> — risco de perda de confiança na marca líder. Prazo: contínuo.</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ D2 DEMO: SAZONALIDADE ══ -->
+  <div class="slide demo-slide" id="d2">
+    <div class="brand-badge"><span class="bname">Malu Doces</span><div class="bbar"></div></div>
+    <div class="slide-header">
+      <span class="tag">Demo 02</span>
+      <h2>Quando ativar promoção para maximizar volume de vendas?</h2>
+      <div class="line"></div>
+      <div class="demo-badge">📋 Resposta real do crew</div>
+    </div>
+    <div class="report-grid">
+
+      <div class="report-col">
+        <div class="report-card">
+          <h4>Resumo Executivo</h4>
+          <p class="report-text">Para maximizar volume, promoções devem ser ativadas estrategicamente nos meses de pico: <strong>Abril, Dezembro, Junho, Outubro e Março</strong>. Lacta (17,53%), Bis (15,49%) e Kit Kat (12,48%) lideram o sell-out. O canal Supermercado concentra 52,3% do faturamento (R$&nbsp;178,7M). A voz do consumidor aponta embalagem, textura e recheio como atributos decisivos.</p>
+        </div>
+        <div class="metric-row">
+          <div class="metric-chip">
+            <div class="mc-val">R$&nbsp;341,9M</div>
+            <div class="mc-label">Faturamento total</div>
+          </div>
+          <div class="metric-chip">
+            <div class="mc-val rosa">52,3%</div>
+            <div class="mc-label">Share supermercado</div>
+          </div>
+          <div class="metric-chip">
+            <div class="mc-val menta">60%</div>
+            <div class="mc-label">Reviews positivos</div>
+          </div>
+        </div>
+        <div class="report-card">
+          <h4>Sazonalidade — picos confirmados: Abr · Dez · Jun · Out · Mar</h4>
+          <div class="saz-mini">
+            <div><div class="saz-mini-bar" style="height:38%"></div><div class="saz-mini-label">Jan</div></div>
+            <div><div class="saz-mini-bar" style="height:34%"></div><div class="saz-mini-label">Fev</div></div>
+            <div><div class="saz-mini-bar high" style="height:72%"></div><div class="saz-mini-label">Mar</div></div>
+            <div><div class="saz-mini-bar peak" style="height:100%"></div><div class="saz-mini-label">Abr</div></div>
+            <div><div class="saz-mini-bar" style="height:50%"></div><div class="saz-mini-label">Mai</div></div>
+            <div><div class="saz-mini-bar high" style="height:80%"></div><div class="saz-mini-label">Jun</div></div>
+            <div><div class="saz-mini-bar" style="height:46%"></div><div class="saz-mini-label">Jul</div></div>
+            <div><div class="saz-mini-bar" style="height:42%"></div><div class="saz-mini-label">Ago</div></div>
+            <div><div class="saz-mini-bar" style="height:48%"></div><div class="saz-mini-label">Set</div></div>
+            <div><div class="saz-mini-bar high" style="height:76%"></div><div class="saz-mini-label">Out</div></div>
+            <div><div class="saz-mini-bar" style="height:58%"></div><div class="saz-mini-label">Nov</div></div>
+            <div><div class="saz-mini-bar peak" style="height:90%"></div><div class="saz-mini-label">Dez</div></div>
+          </div>
+        </div>
+        <div class="report-card" style="flex:1">
+          <h4>Voz do Consumidor — atributos e reclamações</h4>
+          <div class="review-mini pos" style="margin-bottom:6px">
+            <div class="rm-marca">⭐ Embalagem — Unique, Bis, Lacta</div>
+            <div class="rm-text">"A embalagem do Bis é prática demais. Cada um no seu envelope — não suja a mão e dura no bolso."</div>
+          </div>
+          <div class="review-mini pos" style="margin-bottom:6px">
+            <div class="rm-marca">⭐ Textura — Hershey's</div>
+            <div class="rm-text">"Textura cremosa diferente de qualquer outro. Derrete na boca do jeito certo."</div>
+          </div>
+          <div class="review-mini">
+            <div class="rm-marca">⚠ Derretimento na entrega — reclamação principal</div>
+            <div class="rm-text">"Chegou completamente derretido. Precisa de embalagem térmica para envios no verão."</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="report-col">
+        <div class="report-card">
+          <h4>Share das 3 principais marcas — canal supermercado</h4>
+          <div class="answer-row"><span class="ar-pos">1</span><div style="flex:1"><div class="ar-name">Lacta</div><div class="ar-sub">Mondelēz</div></div><div class="ar-bar"><div class="ar-fill" style="width:100%"></div></div><span class="ar-val">17,53%</span></div>
+          <div class="answer-row"><span class="ar-pos">2</span><div style="flex:1"><div class="ar-name">Bis</div><div class="ar-sub">Mondelēz</div></div><div class="ar-bar"><div class="ar-fill" style="width:88%"></div></div><span class="ar-val">15,49%</span></div>
+          <div class="answer-row"><span class="ar-pos">3</span><div style="flex:1"><div class="ar-name">Kit Kat</div><div class="ar-sub">Nestlé</div></div><div class="ar-bar"><div class="ar-fill" style="width:71%"></div></div><span class="ar-val">12,48%</span></div>
+          <div class="answer-row"><span class="ar-pos">4</span><div style="flex:1"><div class="ar-name">Prestígio</div><div class="ar-sub">Nestlé — estável</div></div><div class="ar-bar"><div class="ar-fill" style="width:36%"></div></div><span class="ar-val">6,33%</span></div>
+          <div class="answer-row"><span class="ar-pos">5</span><div style="flex:1"><div class="ar-name">Sonho de Valsa</div><div class="ar-sub">Mondelēz — estável</div></div><div class="ar-bar"><div class="ar-fill" style="width:35%"></div></div><span class="ar-val">6,08%</span></div>
+          <div class="answer-row"><span class="ar-pos">6</span><div style="flex:1"><div class="ar-name">Ouro Branco</div><div class="ar-sub">Mondelēz — estável</div></div><div class="ar-bar"><div class="ar-fill" style="width:30%"></div></div><span class="ar-val">5,27%</span></div>
+        </div>
+        <div class="report-card" style="flex:1">
+          <h4>Oportunidades identificadas</h4>
+          <div class="rec-list">
+            <div class="rec-item"><span class="rec-num">1</span><span><strong>Ativar promoções estratégicas</strong> em Abril, Dezembro, Junho, Outubro e Março — negociar tabloide e segunda posição 3–4 semanas antes de cada pico. Prazo: 2 meses.</span></div>
+            <div class="rec-item"><span class="rec-num">2</span><span><strong>Melhoria logística para derretimento</strong> — embalagem térmica e SLA de temperatura para envios no verão. Reduz reclamação principal. Prazo: 3 meses.</span></div>
+            <div class="rec-item"><span class="rec-num">3</span><span><strong>Pesquisa de mercado</strong> para entender preferências regionais por canal e período — subsidiar negociação com fornecedores. Prazo: 4 meses.</span></div>
+            <div class="rec-item"><span class="rec-num">4</span><span><strong>Parcerias com influenciadores</strong> destacando embalagem, textura e recheio — atributos mais elogiados nas reviews. Prazo: 2 meses.</span></div>
+            <div class="rec-item"><span class="rec-num">5</span><span><strong>Monitorar e ajustar continuamente</strong> com base nos feedbacks — dashboard de sentiment atualizado mensalmente. Prazo: contínuo.</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ D3 DEMO: PREMIUM ══ -->
+  <div class="slide demo-slide" id="d3">
+    <div class="brand-badge"><span class="bname">Malu Doces</span><div class="bbar"></div></div>
+    <div class="slide-header">
+      <span class="tag">Demo 03</span>
+      <h2>Marcas premium valem o espaço na gôndola?</h2>
+      <div class="line"></div>
+      <div class="demo-badge">📋 Resposta real do crew</div>
+    </div>
+    <div class="report-grid">
+
+      <div class="report-col">
+        <div class="report-card">
+          <h4>Resumo Executivo</h4>
+          <p class="report-text"><strong>Sim — as marcas premium valem o espaço.</strong> Sonho de Valsa (R$&nbsp;18,4M) e Ferrero Rocher (R$&nbsp;12,2M) somam R$&nbsp;30,5M e representam 10,1% do faturamento total com preço médio unitário <strong>2,4× acima do mainstream</strong>. Reviews demonstram compra por presenteação e ocasião especial — demanda inelástica a preço. O espaço se paga pela margem, não pelo giro.</p>
+        </div>
+        <div class="metric-row">
+          <div class="metric-chip">
+            <div class="mc-val rosa">R$&nbsp;30,5M</div>
+            <div class="mc-label">Segmento premium</div>
+          </div>
+          <div class="metric-chip">
+            <div class="mc-val menta">10,1%</div>
+            <div class="mc-label">Share do total</div>
+          </div>
+          <div class="metric-chip">
+            <div class="mc-val lilas">2,4×</div>
+            <div class="mc-label">Preço vs mainstream</div>
+          </div>
+        </div>
+        <div class="report-card" style="flex:1">
+          <h4>Voz do Consumidor — gifting e ocasião especial</h4>
+          <div class="review-mini pos" style="margin-bottom:6px">
+            <div class="rm-marca">⭐ Ferrero Rocher — presente</div>
+            <div class="rm-text">"Comprei para presentear no Dia das Mães. A embalagem é linda, parece um presente sem precisar de embrulho. Todo mundo adorou."</div>
+          </div>
+          <div class="review-mini pos" style="margin-bottom:6px">
+            <div class="rm-marca">⭐ Sonho de Valsa — tradição de Natal</div>
+            <div class="rm-text">"Clássico de Natal que nunca decepciona. Caixa grande, bem apresentada, sabor que todo mundo gosta. Compro todo ano."</div>
+          </div>
+          <div class="review-mini pos">
+            <div class="rm-marca">⭐ Raffaello — presença no bloco premium</div>
+            <div class="rm-text">"Mais delicado do que o Ferrero, perfeito para quem prefere algo diferente. Ótimo para datas especiais."</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="report-col">
+        <div class="report-card">
+          <h4>Faturamento — premium vs mainstream (dados reais)</h4>
+          <div class="answer-row"><span class="ar-pos">★</span><div style="flex:1"><div class="ar-name">Lacta</div><div class="ar-sub">Mainstream · Mondelēz</div></div><div class="ar-bar"><div class="ar-fill" style="width:100%"></div></div><span class="ar-val">R$&nbsp;52,9M</span></div>
+          <div class="answer-row"><span class="ar-pos">★</span><div style="flex:1"><div class="ar-name">Bis</div><div class="ar-sub">Mainstream · Mondelēz</div></div><div class="ar-bar"><div class="ar-fill" style="width:88%"></div></div><span class="ar-val">R$&nbsp;46,8M</span></div>
+          <div class="answer-row"><span class="ar-pos">★</span><div style="flex:1"><div class="ar-name">Kit Kat</div><div class="ar-sub">Mainstream · Nestlé</div></div><div class="ar-bar"><div class="ar-fill" style="width:71%"></div></div><span class="ar-val">R$&nbsp;37,7M</span></div>
+          <div class="answer-row"><span class="ar-pos">P</span><div style="flex:1"><div class="ar-name">Sonho de Valsa</div><div class="ar-sub">Premium · Mondelēz · 2,4× preço</div></div><div class="ar-bar"><div class="ar-fill" style="width:35%;background:#C8A8E9"></div></div><span class="ar-val">R$&nbsp;18,4M</span></div>
+          <div class="answer-row"><span class="ar-pos">P</span><div style="flex:1"><div class="ar-name">Ferrero Rocher</div><div class="ar-sub">Premium · Ferrero · 2,4× preço</div></div><div class="ar-bar"><div class="ar-fill" style="width:23%;background:#C8A8E9"></div></div><span class="ar-val">R$&nbsp;12,2M</span></div>
+          <div class="answer-row"><span class="ar-pos">P</span><div style="flex:1"><div class="ar-name">Raffaello</div><div class="ar-sub">Premium · Ferrero</div></div><div class="ar-bar"><div class="ar-fill" style="width:6%;background:#C8A8E9"></div></div><span class="ar-val">R$&nbsp;3,1M</span></div>
+        </div>
+        <div class="report-card" style="flex:1">
+          <h4>Oportunidades e Recomendações</h4>
+          <div class="rec-list">
+            <div class="rec-item"><span class="rec-num">1</span><span><strong>Manter bloco premium na ala superior</strong> da gôndola — visibilidade para quem busca presenteação, não para quem busca giro rápido. Prazo: imediato.</span></div>
+            <div class="rec-item"><span class="rec-num">2</span><span><strong>Ativar ilhas sazonais premium</strong> na Páscoa e Natal — períodos onde demanda por gifting é máxima. Incluir sinalização "ideal para presentear". Prazo: antes de cada data.</span></div>
+            <div class="rec-item"><span class="rec-num">3</span><span><strong>Comunicar premium como gifting nas redes sociais</strong> — parceria com influenciadores de lifestyle para posicionar Ferrero e Sonho de Valsa em datas comemorativas. Prazo: 2 meses.</span></div>
+            <div class="rec-item"><span class="rec-num">4</span><span><strong>Avaliar inclusão de embalagem-presente</strong> no PDV — kits montados in-store aumentam ticket médio e aproveitam disposição a pagar do consumidor de gifting. Prazo: 6 meses.</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ D4 DEMO: CANAL ══ -->
+  <div class="slide demo-slide" id="d4">
+    <div class="brand-badge"><span class="bname">Malu Doces</span><div class="bbar"></div></div>
+    <div class="slide-header">
+      <span class="tag">Demo 04</span>
+      <h2>Qual canal de venda tem o maior gap de oportunidade?</h2>
+      <div class="line"></div>
+      <div class="demo-badge">📋 Resposta real do crew</div>
+    </div>
+    <div class="report-grid">
+
+      <div class="report-col">
+        <div class="report-card">
+          <h4>Resumo Executivo</h4>
+          <p class="report-text">O <strong>Supermercado</strong> lidera com R$&nbsp;178.707.784,03 (52,3% do total) — canal mais lucrativo mas também o mais disputado. <strong>Farmácia e conveniência</strong> apresentam catálogos restritos de 2–4 SKUs e reviews evidenciam ruptura nos picos sazonais. O maior gap está nesses dois canais: alta demanda não atendida com baixa presença de marcas.</p>
+        </div>
+        <div class="metric-row">
+          <div class="metric-chip">
+            <div class="mc-val rosa">R$&nbsp;178,7M</div>
+            <div class="mc-label">Supermercado</div>
+          </div>
+          <div class="metric-chip">
+            <div class="mc-val menta">52,3%</div>
+            <div class="mc-label">Share supermercado</div>
+          </div>
+          <div class="metric-chip">
+            <div class="mc-val lilas">2–4</div>
+            <div class="mc-label">SKUs conveniência</div>
+          </div>
+        </div>
+        <div class="report-card" style="flex:1">
+          <h4>Voz do Consumidor — ruptura em canais menores</h4>
+          <div class="review-mini" style="margin-bottom:6px">
+            <div class="rm-marca">⚠ Farmácia — catálogo estreito</div>
+            <div class="rm-text">"Fui à farmácia da esquina buscar um chocolate para presentear e só havia dois tipos. Acabei saindo sem comprar."</div>
+          </div>
+          <div class="review-mini" style="margin-bottom:6px">
+            <div class="rm-marca">⚠ Conveniência — pouca variedade premium</div>
+            <div class="rm-text">"Conveniência no aeroporto tinha prateleira enorme mas quase tudo igual, sem variedade. Queria algo diferente."</div>
+          </div>
+          <div class="review-mini pos">
+            <div class="rm-marca">⭐ Supermercado — melhor experiência</div>
+            <div class="rm-text">"No supermercado sempre tem tudo que preciso. Gôndola bem abastecida mesmo na Páscoa."</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="report-col">
+        <div class="report-card">
+          <h4>Share por canal — Supermercado: dado real · demais: estimativa analítica</h4>
+          <div class="comp-row">
+            <div class="comp-item">
+              <span class="comp-name">Supermercado</span>
+              <div class="comp-bar-wrap"><div class="comp-fill" style="width:52%;background:var(--rosa)"><span>52,3%</span></div></div>
+              <span class="comp-pct">R$&nbsp;178,7M</span>
+            </div>
+            <div class="comp-item">
+              <span class="comp-name">Atacado</span>
+              <div class="comp-bar-wrap"><div class="comp-fill" style="width:24%;background:var(--lilas)"><span>~24%</span></div></div>
+              <span class="comp-pct">~R$&nbsp;82M</span>
+            </div>
+            <div class="comp-item">
+              <span class="comp-name">Farmácia</span>
+              <div class="comp-bar-wrap"><div class="comp-fill" style="width:13%;background:var(--menta)"><span>~13%</span></div></div>
+              <span class="comp-pct">~R$&nbsp;44M</span>
+            </div>
+            <div class="comp-item">
+              <span class="comp-name">Conveniência</span>
+              <div class="comp-bar-wrap"><div class="comp-fill" style="width:11%;background:#F0C080"><span>~11%</span></div></div>
+              <span class="comp-pct">~R$&nbsp;37M</span>
+            </div>
+          </div>
+        </div>
+        <div class="report-card" style="flex:1">
+          <h4>Oportunidades por canal</h4>
+          <div class="rec-list">
+            <div class="rec-item"><span class="rec-num">1</span><span><strong>Ampliar sortimento em farmácias para 8–10 SKUs</strong> — incluir impulso (Bis, Ouro Branco) e premium pequeno (Ferrero Rocher caixa individual). Negociar espaço dedicado. Prazo: 3 meses.</span></div>
+            <div class="rec-item"><span class="rec-num">2</span><span><strong>Priorizar formatos unitários em conveniência</strong> — Bis individual, Kit Kat mini, bombons avulsos. Alto giro e margem superior. Prazo: 2 meses.</span></div>
+            <div class="rec-item"><span class="rec-num">3</span><span><strong>Garantir estoque antecipado nos canais menores</strong> para as janelas de Abril e Dezembro — ruptura nesses períodos gera perda de venda irrecuperável. Prazo: antes de cada pico.</span></div>
+            <div class="rec-item"><span class="rec-num">4</span><span><strong>Mapear farmácias de alto tráfego</strong> próximas a locais de trabalho — público premium disposto a pagar mais em compras de impulso de conveniência. Prazo: 4 meses.</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ D5 DEMO: COMPETITIVO ══ -->
+  <div class="slide demo-slide" id="d5">
+    <div class="brand-badge"><span class="bname">Malu Doces</span><div class="bbar"></div></div>
+    <div class="slide-header">
+      <span class="tag">Demo 05</span>
+      <h2>Como a Mondelēz domina frente à Nestlé no sell-out?</h2>
+      <div class="line"></div>
+      <div class="demo-badge">📋 Resposta real do crew</div>
+    </div>
+    <div class="report-grid">
+
+      <div class="report-col">
+        <div class="report-card">
+          <h4>Resumo Executivo</h4>
+          <p class="report-text"><strong>Mondelēz lidera em volume</strong> com R$&nbsp;143,3M nas 5 principais marcas (41,9% do faturamento). <strong>Nestlé compete com R$&nbsp;99,5M</strong> e vantagem qualitativa — Kit Kat tem a melhor percepção de textura e consistência. A Lacta acumula críticas crescentes sobre reformulação percebida, abrindo janela de oportunidade para Nestlé avançar no mainstream. A disputa é <strong>volume (Mondelēz) vs percepção (Nestlé)</strong>.</p>
+        </div>
+        <div class="metric-row">
+          <div class="metric-chip">
+            <div class="mc-val rosa">R$&nbsp;143,3M</div>
+            <div class="mc-label">Mondelēz top-5</div>
+          </div>
+          <div class="metric-chip">
+            <div class="mc-val lilas">R$&nbsp;99,5M</div>
+            <div class="mc-label">Nestlé top-8</div>
+          </div>
+          <div class="metric-chip">
+            <div class="mc-val menta">Kit Kat</div>
+            <div class="mc-label">Melhor percepção</div>
+          </div>
+        </div>
+        <div class="report-card" style="flex:1">
+          <h4>Voz do Consumidor — Mondelēz vs Nestlé</h4>
+          <div class="review-mini" style="margin-bottom:6px">
+            <div class="rm-marca">⚠ Lacta — sinal de alerta</div>
+            <div class="rm-text">"Sempre gostei muito, mas nos últimos meses achei que o chocolate ficou mais doce do que antes. Perdeu o sabor original."</div>
+          </div>
+          <div class="review-mini pos" style="margin-bottom:6px">
+            <div class="rm-marca">⭐ Kit Kat — melhor textura</div>
+            <div class="rm-text">"Melhor chocolate para comer aos pedacinhos. Textura perfeita, não desgruda, crocante na medida certa."</div>
+          </div>
+          <div class="review-mini pos">
+            <div class="rm-marca">⭐ Bis — impulso e praticidade</div>
+            <div class="rm-text">"Bis é vício. Embalagem prática, cada unidade separada, perfeito para lanchar qualquer hora."</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="report-col">
+        <div class="report-card">
+          <h4>Share por fabricante — calculado sobre marcas do dataset (R$&nbsp;341,9M total)</h4>
+          <div class="comp-row">
+            <div class="comp-item">
+              <span class="comp-name">Mondelēz</span>
+              <div class="comp-bar-wrap"><div class="comp-fill" style="width:42%;background:var(--rosa)"><span>41,9%</span></div></div>
+              <span class="comp-pct">R$&nbsp;143,3M</span>
+            </div>
+            <div class="comp-item">
+              <span class="comp-name">Nestlé</span>
+              <div class="comp-bar-wrap"><div class="comp-fill" style="width:29%;background:var(--lilas)"><span>29,1%</span></div></div>
+              <span class="comp-pct">R$&nbsp;99,5M</span>
+            </div>
+            <div class="comp-item">
+              <span class="comp-name">Hershey's</span>
+              <div class="comp-bar-wrap"><div class="comp-fill" style="width:6%;background:#F4B8B8"><span>5,4%</span></div></div>
+              <span class="comp-pct">R$&nbsp;18,6M</span>
+            </div>
+            <div class="comp-item">
+              <span class="comp-name">Ferrero</span>
+              <div class="comp-bar-wrap"><div class="comp-fill" style="width:5%;background:#F0C080"><span>4,5%</span></div></div>
+              <span class="comp-pct">R$&nbsp;15,3M</span>
+            </div>
+            <div class="comp-item">
+              <span class="comp-name">Arcor</span>
+              <div class="comp-bar-wrap"><div class="comp-fill" style="width:4%;background:var(--menta)"><span>3,8%</span></div></div>
+              <span class="comp-pct">R$&nbsp;13,0M</span>
+            </div>
+          </div>
+          <div style="font-size:9px;color:var(--gray);margin-top:8px">Demais marcas (Harald, outros): R$&nbsp;52,2M · 15,3%</div>
+        </div>
+        <div class="report-card" style="flex:1">
+          <h4>Análise competitiva e recomendações</h4>
+          <div class="rec-list">
+            <div class="rec-item"><span class="rec-num">1</span><span><strong>Negociar condições com Mondelēz</strong> aproveitando posição dominante — 41,9% do faturamento gera alto poder de barganha para melhores preços e verbas de trade. Prazo: próxima renovação contratual.</span></div>
+            <div class="rec-item"><span class="rec-num">2</span><span><strong>Ampliar Kit Kat premium e portfólio Nestlé</strong> — vantagem de percepção não está sendo totalmente explorada. Mais SKUs Nestlé podem aumentar satisfação geral. Prazo: 3 meses.</span></div>
+            <div class="rec-item"><span class="rec-num">3</span><span><strong>Monitorar percepção da Lacta</strong> — reclamações de reformulação são sinal de alerta. Janela para Nestlé crescer no mainstream se o problema persistir. Prazo: contínuo.</span></div>
+            <div class="rec-item"><span class="rec-num">4</span><span><strong>Avaliar diversificação de fabricantes</strong> — concentração de 71% em Mondelēz + Nestlé cria risco de ruptura de fornecimento. Harald e Ferrero são alternativas premium. Prazo: 6 meses.</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ S10 PRÓXIMOS PASSOS ══ -->
+  <div class="slide" id="s10">
+    <div class="s1-tag">Retail Analyst · Malu Doces</div>
+    <h2>O que vem<br><span>a seguir</span></h2>
+    <div class="cta-grid">
+      <div class="cta-card">
+        <div class="cta-icon">🔗</div>
+        <div class="cta-title">GitHub</div>
+        <div class="cta-desc">Código completo com ShadowTraffic, CrewAI, Postgres, Qdrant e Chainlit. Pronto para rodar localmente.</div>
+      </div>
+      <div class="cta-card">
+        <div class="cta-icon">💬</div>
+        <div class="cta-title">Chainlit</div>
+        <div class="cta-desc">Interface conversacional com os 3 agentes respondendo perguntas de negócio em tempo real.</div>
+      </div>
+      <div class="cta-card">
+        <div class="cta-icon">📈</div>
+        <div class="cta-title">Seus dados</div>
+        <div class="cta-desc">Troque o dataset de chocolates pelos dados da sua empresa — a arquitetura funciona para qualquer CPG.</div>
+      </div>
+    </div>
+    <div class="cta-bar">
+      <a class="cta-btn" href="https://github.com/georgeluizfernandes" target="_blank">→ Ver no GitHub</a>
+      <a class="cta-btn outline" href="https://www.linkedin.com/in/georgeluizfernandes" target="_blank">LinkedIn</a>
+    </div>
+    <div class="deco-circle"></div>
+    <div class="deco-dot"></div>
+  </div>
+
+</div>
+
+<!-- ── NAVEGAÇÃO ── -->
+<nav class="nav">
+  <button id="prev" onclick="move(-1)">&#8592;</button>
+  <span id="counter">1 / 10</span>
+  <button id="next" onclick="move(1)">&#8594;</button>
+</nav>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let cur = 0;
+
+  function show(n) {
+    slides[cur].classList.remove('active');
+    cur = (n + slides.length) % slides.length;
+    slides[cur].classList.add('active');
+    document.getElementById('counter').textContent = (cur + 1) + ' / ' + slides.length;
+  }
+
+  function move(dir) { show(cur + dir); }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') move(1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   move(-1);
+  });
+
+  let tx = 0;
+  document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; });
+  document.addEventListener('touchend',   e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 50) move(dx < 0 ? 1 : -1);
+  });
+</script>
+</body>
+</html>

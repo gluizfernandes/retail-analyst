@@ -1,0 +1,62 @@
+sales_task:
+  description: >
+    Responda à pergunta de negócio com queries SQL no banco malu_doces: "{question}".
+    Passos obrigatórios:
+    1. Identifique quais tabelas precisar (marcas, skus, lojas, vendas).
+    2. Escreva e execute SQL via a ferramenta postgres_execute_sql.
+    3. Se precisar de múltiplos ângulos (ranking + sazonalidade + canal), execute queries separadas.
+    4. Para o ranking de marcas, use SEMPRE este padrão de JOIN:
+       SELECT m.nome, SUM(v.faturamento_bruto) as faturamento
+       FROM vendas v
+       JOIN skus s ON v.sku_id = s.sku_id
+       JOIN marcas m ON s.marca_id = m.marca_id
+       GROUP BY m.nome ORDER BY faturamento DESC
+    5. Interprete os resultados com labels e unidades: R$, %, unidades vendidas.
+    6. Calcule share de mercado usando SUM() OVER () quando relevante.
+  expected_output: >
+    Sumário estruturado dos resultados SQL com:
+    - Números exatos com unidades (R$, unidades, %)
+    - Ranking completo quando solicitado
+    - Queries SQL utilizadas para auditoria
+    - Classificação de performance: Destaque (>10% share), Crescimento, Estável, Alerta (<2%)
+  agent: sales_analyst
+
+research_task:
+  description: >
+    Pesquise sentimento e temas de consumidores relacionados a: "{question}".
+    Passos obrigatórios:
+    1. Extraia os conceitos semânticos principais da pergunta.
+    2. Execute 2-3 buscas semânticas cobrindo ângulos diferentes
+       (ex: elogios, reclamações, tendências, ocasião de uso).
+    3. Filtre por marca ou sentimento quando relevante.
+    4. Identifique temas recorrentes com frequência e evidências textuais.
+  expected_output: >
+    Análise temática do corpus de reviews com:
+    - Distribuição de sentimento (% positivo/neutro/negativo)
+    - Top 3 atributos elogiados com citações reais
+    - Top 2-3 reclamações com citações reais
+    - Tendências ou padrões emergentes identificados
+    - Rating médio quando disponível
+  agent: market_researcher
+
+report_task:
+  description: >
+    Gere relatório executivo completo respondendo: "{question}".
+    Você tem acesso aos resultados do analista de vendas (SQL) e do pesquisador de mercado (reviews).
+    Estrutura obrigatória:
+    1. Resumo Executivo (3 frases — o essencial para um diretor ler em 30 segundos)
+    2. KPIs Principais (números exatos do analista, com contexto)
+    3. Ranking de Marcas (tabela com faturamento, share, performance)
+    4. Sazonalidade (meses de pico com uplift %)
+    5. Voz do Consumidor (temas do pesquisador com citações)
+    6. Oportunidades (2-3 gaps identificados nos dados)
+    7. Recomendações (3-5 ações priorizadas com responsável e prazo sugerido)
+  expected_output: >
+    Relatório executivo polido em português, combinando métricas quantitativas
+    e insights qualitativos. Cada recomendação referencia dados específicos
+    do analista ou citações do pesquisador. Formatado em Markdown.
+    Tom: profissional mas acessível, orientado à ação.
+  agent: reporter
+  context:
+    - sales_task
+    - research_task

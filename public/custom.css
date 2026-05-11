@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Lato:wght@300;400;700&display=swap');
+
+:root {
+  --rosa:       #F2A7BB;
+  --lilas:      #C8A8E9;
+  --creme:      #FFF5E6;
+  --menta:      #A8D8C8;
+  --choco-dark: #3D1C02;
+  --choco-mid:  #7B4F2E;
+}
+
+/* Header / nome do app */
+#header .MuiTypography-root,
+.watermark {
+  font-family: 'Dancing Script', cursive !important;
+  font-size: 1.5rem !important;
+  color: var(--choco-dark) !important;
+}
+
+/* Mensagens do assistente */
+.message-content[data-author="Malu Doces"] {
+  background: #fff !important;
+  border-left: 4px solid var(--rosa) !important;
+  border-radius: 0 12px 12px 0 !important;
+  font-family: 'Lato', sans-serif !important;
+  color: var(--choco-dark) !important;
+}
+
+/* Steps (agentes) */
+.step-container {
+  border-left: 3px solid var(--lilas) !important;
+  background: #faf5ff !important;
+  font-family: 'Lato', sans-serif !important;
+  font-size: 0.85rem !important;
+}
+
+/* Input de mensagem */
+#chat-input {
+  border: 2px solid var(--rosa) !important;
+  border-radius: 12px !important;
+  font-family: 'Lato', sans-serif !important;
+  background: #fff !important;
+}
+
+#chat-input:focus-within {
+  border-color: var(--lilas) !important;
+  box-shadow: 0 0 0 3px rgba(200, 168, 233, 0.2) !important;
+}
+
+/* Botao de envio */
+#send-button {
+  background: var(--rosa) !important;
+  color: #fff !important;
+}
+
+#send-button:hover {
+  background: #D4849A !important;
+}
