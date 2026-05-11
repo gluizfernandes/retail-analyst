@@ -4,11 +4,9 @@
 
 ---
 
-O varejo brasileiro movimenta R$ 2,7 trilhões por ano.
+No post anterior falei sobre o que separa uma análise de categoria de uma decisão de categoria.
 
-E a maioria das decisões de gôndola ainda é tomada com planilha, gut feeling e reunião de alinhamento.
-
-Não é falta de dado — é falta de uma forma rápida de cruzar dado estruturado com percepção do consumidor.
+Dados de venda você já tem. O que falta é cruzar isso com o que o consumidor está dizendo — rápido, sem precisar de uma equipe de pesquisa.
 
 Foi isso que tentei resolver com o **Retail Analyst Crew**.
 

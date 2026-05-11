@@ -1,14 +1,15 @@
-# Post 02 — Bastidores Técnicos (Arquitetura)
-**Objetivo:** Mostrar a arquitetura. Hook para engenheiros, cientistas de dados e tech leads.
+# Post 01 — Bastidores Técnicos (Arquitetura)
+**Tipo:** Post de texto
+**Objetivo:** Mostrar a arquitetura enquanto a curiosidade está no pico. Hook para engenheiros, cientistas de dados e tech leads.
 **Tom:** Técnico mas acessível. Decisões de design explicadas.
 
 ---
 
-Por trás daquele relatório de chocolates tem uma arquitetura que levei dias para refinar.
+No carrossel que publiquei ontem, você viu o que o sistema entrega.
+
+Hoje: o que está por trás.
 
 **3 agentes. 2 bancos de dados. 1 pergunta em linguagem natural.**
-
-Deixa eu mostrar como funciona:
 
 ---
 
@@ -33,11 +34,10 @@ Não acessa banco de dados — só raciocina sobre o que os outros trouxeram.
 ⚙️ **Stack técnica**
 
 - **Orquestração:** CrewAI 1.14 (processo sequencial, contexto compartilhado)
-- **LLM:** Groq + Llama 3.3 70B (inferência rápida, sem custo de API)
+- **LLM:** Groq + Llama 3.3 70B (inferência rápida, gratuito)
 - **Vector DB:** Qdrant 1.8 (busca semântica dos reviews)
 - **SQL:** Postgres 16 com dados gerados via ShadowTraffic
 - **Interface:** Chainlit 2.11 (chat com steps visíveis em tempo real)
-- **Dados sintéticos:** ShadowTraffic para simular 20 marcas, múltiplos canais e sazonalidade
 
 ---
 
@@ -58,7 +58,7 @@ Pequeno detalhe. Grande diferença na confiabilidade do sistema.
 
 ---
 
-O código completo está no GitHub. Link no próximo post. 👇
+No próximo post: o que esse sistema responde que uma dashboard tradicional não conseguiria responder. 👇
 
 ---
 
